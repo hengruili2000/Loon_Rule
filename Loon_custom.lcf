@@ -135,6 +135,8 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list, policy=社交媒体, tag=社交媒体 - Patreon, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list, policy=默认代理, tag=海外兜底 - Proxy, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy_Domain.list, policy=默认代理, tag=海外兜底 - Proxy Domain, enabled=true
 
 
 [Host]
