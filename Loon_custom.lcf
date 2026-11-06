@@ -97,6 +97,7 @@ FINAL, 漏网之鱼
 [Remote Rule]
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Custom_US_Proxy.list, policy=美国手动场景, tag=Custom US Proxy, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-ai-!cn.list, policy=AI, tag=AI, enabled=true
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=Speedtest Intl, tag=Speedtest Intl, enabled=true
 https://rule.kelee.one/Loon/Netflix.lsr, policy=Netflix, tag=Netflix, enabled=true
