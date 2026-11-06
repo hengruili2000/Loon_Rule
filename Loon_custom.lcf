@@ -1,4 +1,4 @@
-# Loon 进阶配置（全类型策略组版） - 此配置文件包含全部自动类型策略组，你可以选择你需要的自动策略组类型。默认会自动选择网络时延最低的代理节点，无需人工干预，所有过程完全自动化。当连接到配备透明代理的路由器时，Loon 将使用“直连”策略，此时所有流量直接通过你的路由器；在其他网络环境中，Loon 将使用自身的“自动分流”模式访问这些网站，从而避免在已使用透明代理路由器时出现双重代理。
+# Loon 自定义配置。服务策略可选择默认代理或手动场景。兜底按地区顺序尝试手动场景，最后尝试 DIRECT。连接 PHICOMM_5G 时，场景策略使用 DIRECT。
 # Date: 2025-11-08 00:21:37
 # Author: https://t.me/iKeLee
 # 更多插件可前往 https://hub.kelee.one 安装
@@ -27,8 +27,10 @@ skip-proxy=192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, e.cras
 bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32
 
 [Proxy]
+# 可在 Loon 中添加本地节点。
 
 [Remote Proxy]
+# 导入后请在 Loon 中添加自己的订阅。
 
 [Remote Filter]
 香港节点=NameRegex, FilterKey="^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
@@ -41,6 +43,13 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 全球节点=NameRegex, FilterKey="^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
 
 [Proxy Group]
+# 默认代理与服务分流
+默认代理=select, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 游戏手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/proxy.png
+TikTok=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 游戏手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/tiktok.png
+AI=select, 默认代理, 美国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 游戏手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/ai.png
+Speedtest Intl=select, 默认代理, 全球手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 游戏手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/speedtest.png
+Netflix=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 游戏手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/netflix.png
+
 # --------------------------------
 # 场景策略
 香港手动场景=ssid, default=香港手动策略, cellular=香港手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -61,10 +70,9 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 美国手动策略=select, 美国节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 游戏手动策略=select, 游戏节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
 全球手动策略=select, 全球节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
-
 # --------------------------------
 # 兜底策略后备
-兜底后备策略=fallback, 香港自动场景, 台湾自动场景, 日本自动场景, 韩国自动场景, 新国自动场景, 美国自动场景, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
+兜底后备策略=fallback, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, DIRECT, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
 
 [Rule]
 # 当配置文件中没有任何有效策略组时，Loon将使用内置的PROXY策略组
@@ -78,10 +86,10 @@ IP-CIDR6, fc00::/18, DIRECT
 FINAL, 兜底后备策略
 
 [Remote Rule]
-https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=新国手动场景, tag=TikTok, enabled=true
-https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=美国手动场景, tag=AI, enabled=true
-https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=全球手动场景, tag=Speedtest Intl, enabled=true
-https://rule.kelee.one/Loon/Netflix.lsr, policy=新国手动场景, tag=Netflix, enabled=true
+https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=true
+https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI, tag=AI, enabled=true
+https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=Speedtest Intl, tag=Speedtest Intl, enabled=true
+https://rule.kelee.one/Loon/Netflix.lsr, policy=Netflix, tag=Netflix, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 
@@ -97,12 +105,12 @@ ssid: PHICOMM_5G=server: 10.0.0.1
 https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, pin=true, enabled=true
 https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, pin=true, enabled=true
 https://kelee.one/Tool/Loon/Lpx/QuickSearch.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx, policy=兜底后备策略, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx, policy=默认代理, enabled=true
 https://kelee.one/Tool/Loon/Lpx/Node_detection_tool.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx, policy=DIRECT, enabled=false
-https://kelee.one/Tool/Loon/Lpx/BoxJs.lpx, policy=兜底后备策略, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx, policy=兜底后备策略, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, policy=兜底后备策略, enabled=true
+https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx, policy=默认代理, enabled=false
+https://kelee.one/Tool/Loon/Lpx/BoxJs.lpx, policy=默认代理, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx, policy=默认代理, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, policy=默认代理, enabled=true
 
 [Mitm]
 hostname=
