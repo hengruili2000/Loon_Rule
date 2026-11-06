@@ -1,4 +1,4 @@
-# Loon 自定义配置。服务策略可选择默认代理或手动场景。兜底可手动选择地区场景或 DIRECT。连接 PHICOMM_5G 时，场景策略使用 DIRECT。
+# Loon 自定义配置。服务策略可选择默认代理或手动场景。漏网之鱼默认使用 DIRECT，也可手动选择地区场景。连接 PHICOMM_5G 时，场景策略使用 DIRECT。
 # Date: 2025-11-08 00:21:37
 # Author: https://t.me/iKeLee
 # 更多插件可前往 https://hub.kelee.one 安装
@@ -52,6 +52,7 @@ AI=select, 默认代理, 美国手动场景, 香港手动场景, 台湾手动场
 Speedtest Intl=select, 默认代理, 全球手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/speedtest.png
 Netflix=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/netflix.png
 Apple TV=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/apple-tv.png
+Apple服务=select, DIRECT, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/apple-services.png
 Spotify=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/spotify.png
 社交媒体=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/social-media.png
 
@@ -65,8 +66,8 @@ Spotify=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手�
 美国手动策略=select, 美国节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 全球手动策略=select, 全球节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 # --------------------------------
-# 兜底策略后备
-兜底后备策略=select, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, DIRECT, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
+# 漏网之鱼
+漏网之鱼=select, DIRECT, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/final.png
 # --------------------------------
 # 场景策略
 香港手动场景=ssid, default=香港手动策略, cellular=香港手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -90,7 +91,7 @@ IP-CIDR6, fc00::/18, DIRECT
 DOMAIN,bahamut.akamaized.net, 社交媒体
 DOMAIN-SUFFIX,bahamut.com.tw, 社交媒体
 DOMAIN-SUFFIX,gamer.com.tw, 社交媒体
-FINAL, 兜底后备策略
+FINAL, 漏网之鱼
 
 [Remote Rule]
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=true
@@ -133,6 +134,8 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list, policy=社交媒体, tag=社交媒体 - Dailymotion, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Civitai/Civitai.list, policy=社交媒体, tag=社交媒体 - Civitai, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list, policy=社交媒体, tag=社交媒体 - Patreon, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple.list, policy=Apple服务, tag=Apple服务, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list, policy=Apple服务, tag=Apple服务 - Domain, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list, policy=默认代理, tag=海外兜底 - Proxy, enabled=true
