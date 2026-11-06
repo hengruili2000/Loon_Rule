@@ -93,7 +93,6 @@ DOMAIN-SUFFIX,gamer.com.tw, 社交媒体
 FINAL, 兜底后备策略
 
 [Remote Rule]
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TikTok/TikTok.list, policy=社交媒体, tag=社交媒体 - TikTok, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=true
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI, tag=AI, enabled=true
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=Speedtest Intl, tag=Speedtest Intl, enabled=true
@@ -129,7 +128,6 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/VK/VK.list, policy=社交媒体, tag=社交媒体 - VK, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list, policy=社交媒体, tag=社交媒体 - Whatsapp, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zalo/Zalo.list, policy=社交媒体, tag=社交媒体 - Zalo, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=社交媒体, tag=社交媒体 - YouTube, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list, policy=社交媒体, tag=社交媒体 - Twitch, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Niconico/Niconico.list, policy=社交媒体, tag=社交媒体 - Niconico, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list, policy=社交媒体, tag=社交媒体 - Dailymotion, enabled=true
