@@ -53,6 +53,7 @@ Speedtest Intl=select, 默认代理, 全球手动场景, 香港手动场景, 台
 Netflix=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/netflix.png
 Apple TV=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/apple-tv.png
 Spotify=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/spotify.png
+社交媒体=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/social-media.png
 
 # --------------------------------
 # 地区策略
@@ -85,15 +86,55 @@ IP-CIDR, 28.0.0.1/8, DIRECT
 IP-CIDR, 198.18.0.1/16, DIRECT
 IP-CIDR, 198.18.0.0/15, DIRECT
 IP-CIDR6, fc00::/18, DIRECT
+# Bahamut：仅使用 blackmatrix7 上游规则中的巴哈姆特专属域名
+DOMAIN,bahamut.akamaized.net, 社交媒体
+DOMAIN-SUFFIX,bahamut.com.tw, 社交媒体
+DOMAIN-SUFFIX,gamer.com.tw, 社交媒体
 FINAL, 兜底后备策略
 
 [Remote Rule]
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TikTok/TikTok.list, policy=社交媒体, tag=社交媒体 - TikTok, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=true
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI, tag=AI, enabled=true
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=Speedtest Intl, tag=Speedtest Intl, enabled=true
 https://rule.kelee.one/Loon/Netflix.lsr, policy=Netflix, tag=Netflix, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleTV/AppleTV.list, policy=Apple TV, tag=Apple TV, enabled=true
 https://rule.kelee.one/Loon/Spotify.lsr, policy=Spotify, tag=Spotify, enabled=true
+# 社交媒体（blackmatrix7）
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/4chan/4chan.list, policy=社交媒体, tag=社交媒体 - 4chan, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Clubhouse/Clubhouse.list, policy=社交媒体, tag=社交媒体 - Clubhouse, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list, policy=社交媒体, tag=社交媒体 - Discord, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disqus/Disqus.list, policy=社交媒体, tag=社交媒体 - Disqus, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Facebook/Facebook.list, policy=社交媒体, tag=社交媒体 - Facebook, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hkgolden/Hkgolden.list, policy=社交媒体, tag=社交媒体 - Hkgolden, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Imgur/Imgur.list, policy=社交媒体, tag=社交媒体 - Imgur, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=社交媒体, tag=社交媒体 - Instagram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/KakaoTalk/KakaoTalk.list, policy=社交媒体, tag=社交媒体 - KakaoTalk, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Line/Line.list, policy=社交媒体, tag=社交媒体 - Line, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/LinkedIn/LinkedIn.list, policy=社交媒体, tag=社交媒体 - LinkedIn, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pinterest/Pinterest.list, policy=社交媒体, tag=社交媒体 - Pinterest, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list, policy=社交媒体, tag=社交媒体 - Pixiv, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixnet/Pixnet.list, policy=社交媒体, tag=社交媒体 - Pixnet, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Reddit/Reddit.list, policy=社交媒体, tag=社交媒体 - Reddit, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Snap/Snap.list, policy=社交媒体, tag=社交媒体 - Snap, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Stackexchange/Stackexchange.list, policy=社交媒体, tag=社交媒体 - Stackexchange, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=社交媒体, tag=社交媒体 - Telegram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramNL/TelegramNL.list, policy=社交媒体, tag=社交媒体 - TelegramNL, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramSG/TelegramSG.list, policy=社交媒体, tag=社交媒体 - TelegramSG, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list, policy=社交媒体, tag=社交媒体 - TelegramUS, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Threads/Threads.list, policy=社交媒体, tag=社交媒体 - Threads, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TruthSocial/TruthSocial.list, policy=社交媒体, tag=社交媒体 - TruthSocial, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list, policy=社交媒体, tag=社交媒体 - Tumblr, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=社交媒体, tag=社交媒体 - Twitter, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/VK/VK.list, policy=社交媒体, tag=社交媒体 - VK, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list, policy=社交媒体, tag=社交媒体 - Whatsapp, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zalo/Zalo.list, policy=社交媒体, tag=社交媒体 - Zalo, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=社交媒体, tag=社交媒体 - YouTube, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list, policy=社交媒体, tag=社交媒体 - Twitch, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Niconico/Niconico.list, policy=社交媒体, tag=社交媒体 - Niconico, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list, policy=社交媒体, tag=社交媒体 - Dailymotion, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Civitai/Civitai.list, policy=社交媒体, tag=社交媒体 - Civitai, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list, policy=社交媒体, tag=社交媒体 - Patreon, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 
