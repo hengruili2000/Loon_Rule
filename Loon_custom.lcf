@@ -51,12 +51,6 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 美国手动场景=ssid, default=美国手动策略, cellular=美国手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 游戏手动场景=ssid, default=游戏手动策略, cellular=游戏手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 全球手动场景=ssid, default=全球手动策略, cellular=全球手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-香港自动场景=ssid, default=香港自动策略, cellular=香港自动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-台湾自动场景=ssid, default=台湾自动策略, cellular=台湾自动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-日本自动场景=ssid, default=日本自动策略, cellular=日本自动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-韩国自动场景=ssid, default=韩国自动策略, cellular=韩国自动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-新国自动场景=ssid, default=新国自动策略, cellular=新国自动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
-美国自动场景=ssid, default=美国自动策略, cellular=美国自动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
 # --------------------------------
 # 地区策略
 香港手动策略=select, 香港节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
@@ -67,34 +61,7 @@ bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12
 美国手动策略=select, 美国节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 游戏手动策略=select, 游戏节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
 全球手动策略=select, 全球节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
-香港自动策略=select, 香港时延优选, 香港故障转移, 香港负载均衡, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾自动策略=select, 台湾时延优选, 台湾故障转移, 台湾负载均衡, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本自动策略=select, 日本时延优选, 日本故障转移, 日本负载均衡, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国自动策略=select, 韩国时延优选, 韩国故障转移, 韩国负载均衡, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国自动策略=select, 新国时延优选, 新国故障转移, 新国负载均衡, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国自动策略=select, 美国时延优选, 美国故障转移, 美国负载均衡, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-# --------------------------------
-# 自动策略
-香港时延优选=url-test, 香港节点, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾时延优选=url-test, 台湾节点, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本时延优选=url-test, 日本节点, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国时延优选=url-test, 韩国节点, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国时延优选=url-test, 新国节点, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国时延优选=url-test, 美国节点, interval=60, tolerance=50, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 
-香港故障转移=fallback, 香港节点, interval=60, max-timeout=2000, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾故障转移=fallback, 台湾节点, interval=60, max-timeout=2000, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本故障转移=fallback, 日本节点, interval=60, max-timeout=2000, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国故障转移=fallback, 韩国节点, interval=60, max-timeout=2000, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国故障转移=fallback, 新国节点, interval=60, max-timeout=2000, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国故障转移=fallback, 美国节点, interval=60, max-timeout=2000, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-
-香港负载均衡=load-balance, 香港节点, interval=60, max-timeout=2000, algorithm=pcc, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾负载均衡=load-balance, 台湾节点, interval=60, max-timeout=2000, algorithm=pcc, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-日本负载均衡=load-balance, 日本节点, interval=60, max-timeout=2000, algorithm=pcc, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国负载均衡=load-balance, 韩国节点, interval=60, max-timeout=2000, algorithm=pcc, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-新国负载均衡=load-balance, 新国节点, interval=60, max-timeout=2000, algorithm=pcc, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-美国负载均衡=load-balance, 美国节点, interval=60, max-timeout=2000, algorithm=pcc, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
 # --------------------------------
 # 兜底策略后备
 兜底后备策略=fallback, 香港自动场景, 台湾自动场景, 日本自动场景, 韩国自动场景, 新国自动场景, 美国自动场景, interval=60, max-timeout=2000, img-url=https://github.com/shindgewongxj/WHATSINStash/raw/main/icon/fallback.png
@@ -117,6 +84,7 @@ https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=全球手动�
 https://rule.kelee.one/Loon/Netflix.lsr, policy=新国手动场景, tag=Netflix, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
+
 
 [Host]
 ssid: PHICOMM_5G=server: 10.0.0.1
