@@ -1,0 +1,62 @@
+name: Sync Category-Dev rules
+
+on:
+  schedule:
+    - cron: '27 */8 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-category-dev.yml'
+      - 'scripts/convert_category_dev.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-category-dev
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      OUTPUT_FILE: rule/Category-Dev.list
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - name: Check out v2fly domain lists
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: v2fly/domain-list-community
+          ref: master
+          path: upstream
+          sparse-checkout: data
+          persist-credentials: false
+
+      - name: Convert Category-Dev rules
+        shell: bash
+        run: |
+          converted="$(mktemp)"
+          trap 'rm -f "$converted"' EXIT
+          python3 scripts/convert_category_dev.py upstream > "$converted"
+          mkdir -p "$(dirname "$OUTPUT_FILE")"
+          mv "$converted" "$OUTPUT_FILE"
+
+      - name: Publish updated rule list
+        shell: bash
+        run: |
+          git add -- "$OUTPUT_FILE"
+          if git diff --cached --quiet; then
+            echo "Rule list is up to date."
+            exit 0
+          fi
+
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'Sync Category-Dev Loon rules'
+          git push origin HEAD:refs/heads/main
