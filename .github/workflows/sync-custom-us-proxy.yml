@@ -1,0 +1,56 @@
+name: Sync Custom US Proxy rules
+
+on:
+  schedule:
+    - cron: '17 */8 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-custom-us-proxy.yml'
+      - 'scripts/convert_custom_us_proxy.rb'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-custom-us-proxy
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      SOURCE_URL: https://raw.githubusercontent.com/hengruili2000/Custom_OpenClash_Rules/main/rule/Custom_US_Proxy.yaml
+      OUTPUT_FILE: rule/Custom_US_Proxy.list
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - name: Download and convert rules
+        shell: bash
+        run: |
+          temporary_dir="$(mktemp -d)"
+          trap 'rm -rf "$temporary_dir"' EXIT
+          curl --fail --silent --show-error --location --retry 3 --retry-max-time 90 \
+            --connect-timeout 10 --max-time 45 "$SOURCE_URL" -o "$temporary_dir/source.yaml"
+          ruby scripts/convert_custom_us_proxy.rb "$temporary_dir/source.yaml" > "$temporary_dir/converted.list"
+          mkdir -p "$(dirname "$OUTPUT_FILE")"
+          mv "$temporary_dir/converted.list" "$OUTPUT_FILE"
+
+      - name: Publish updated rule list
+        shell: bash
+        run: |
+          git add -- "$OUTPUT_FILE"
+          if git diff --cached --quiet; then
+            echo "Rule list is up to date."
+            exit 0
+          fi
+
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'Sync Custom US Proxy Loon rules'
+          git push origin HEAD:refs/heads/main
