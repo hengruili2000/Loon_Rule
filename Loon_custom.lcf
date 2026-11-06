@@ -56,6 +56,7 @@ Apple服务=select, DIRECT, 默认代理, 香港手动场景, 台湾手动场景
 Spotify=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/spotify.png
 社交媒体=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/social-media.png
 国际媒体=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/international-media.png
+加密货币=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/cryptocurrency.png
 开发者服务=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/developer.png
 
 # --------------------------------
@@ -143,6 +144,7 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list, policy=Apple服务, tag=Apple服务 - Domain, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-cryptocurrency.list, policy=加密货币, tag=加密货币, enabled=true
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-media.list, policy=国际媒体, tag=国际媒体 - category-media, enabled=true
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-entertainment.list, policy=国际媒体, tag=国际媒体 - category-entertainment, enabled=true
 https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list, policy=默认代理, tag=海外兜底 - Proxy, enabled=true
