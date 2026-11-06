@@ -51,6 +51,8 @@ TikTok=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手�
 AI=select, 默认代理, 美国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/ai.png
 Speedtest Intl=select, 默认代理, 全球手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/speedtest.png
 Netflix=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/netflix.png
+Apple TV=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/apple-tv.png
+Spotify=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/spotify.png
 
 # --------------------------------
 # 地区策略
@@ -90,6 +92,8 @@ https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=t
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI, tag=AI, enabled=true
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=Speedtest Intl, tag=Speedtest Intl, enabled=true
 https://rule.kelee.one/Loon/Netflix.lsr, policy=Netflix, tag=Netflix, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleTV/AppleTV.list, policy=Apple TV, tag=Apple TV, enabled=true
+https://rule.kelee.one/Loon/Spotify.lsr, policy=Spotify, tag=Spotify, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 
