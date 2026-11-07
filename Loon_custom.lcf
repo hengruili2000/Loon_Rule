@@ -141,13 +141,15 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple.list, policy=Apple服务, tag=Apple服务, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list, policy=Apple服务, tag=Apple服务 - Domain, enabled=true
 https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
-https://rule.kelee.one/Loon/ChinaMax.lsr, policy=DIRECT, tag=ChinaMax, enabled=true
 https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-cryptocurrency.list, policy=加密货币, tag=加密货币, enabled=true
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-media.list, policy=国际媒体, tag=国际媒体 - category-media, enabled=true
 https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-entertainment.list, policy=国际媒体, tag=国际媒体 - category-entertainment, enabled=true
 https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list, policy=默认代理, tag=海外兜底 - Proxy, enabled=true
 https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy_Domain.list, policy=默认代理, tag=海外兜底 - Proxy Domain, enabled=true
+# 国内直连兜底：始终保持在远程规则列表末尾
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=ChinaMax, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list, policy=DIRECT, tag=ChinaMax - Domain, enabled=true
 
 
 [Host]
