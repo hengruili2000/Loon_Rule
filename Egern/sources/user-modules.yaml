@@ -1,0 +1,63 @@
+modules:
+# 自建小组件合集（env 为组件参数）
+- name: 常用小组件
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Widget/Widgets.yaml
+  update_interval: 86400
+  env:
+    TEACHING_WEEK_START: 2026/08/31
+    EXCLUSIVE_NAME_2: 寒假
+    EXCLUSIVE_DATE_2: 01/23
+  enabled: true
+# 订阅管理
+- name: Sub-Store
+  url: https://raw.githubusercontent.com/sub-store-org/Sub-Store/refs/heads/master/config/Egern.yaml
+  update_interval: 259200
+  enabled: true
+- name: BoxJs
+  url: https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.surge.sgmodule
+  update_interval: 259200
+  enabled: true
+- name: Script Hub
+  url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/refs/heads/main/modules/script-hub.beta.egern.yaml
+  update_interval: 259200
+  enabled: true
+- name: WeatherKit
+  url: https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.sgmodule
+  update_interval: 259200
+  enabled: true
+- url: https://raw.githubusercontent.com/mieqq/mieqq/master/skip-proxy-lists.sgmodule
+  enabled: true
+# 自建去广告模块
+- name: 雪球去广告
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/Xueqiu.yaml
+  update_interval: 86400
+  enabled: true
+- name: 综合电商去广告
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/EcommerceAdBlock.yaml
+  update_interval: 86400
+  enabled: true
+- name: 地图三合一去广告
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/MapAdBlock.yaml
+  update_interval: 86400
+  enabled: true
+- name: 差旅出行去广告
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/TravelAdBlock.yaml
+  update_interval: 86400
+  enabled: true
+- name: 音乐流媒体去广告
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/MusicAdBlock.yaml
+  update_interval: 604800
+  enabled: true
+- name: 视频流媒体去广告
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/VideoAdBlock.yaml
+  update_interval: 86400
+  enabled: true
+- name: 京东比价
+  url: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/JDPrice.yaml
+  update_interval: 86400
+  enabled: true
+# App 开屏广告跳过
+- name: App开屏广告跳过
+  url: https://yfamilys.com/module/adultraplus.sgmodule
+  update_interval: 86400
+  enabled: true

@@ -1,0 +1,349 @@
+ipv6: false                          # 关闭 IPv6，避免双栈解析带来的分流不一致
+http_port: 3080                      # 本地 HTTP 代理端口
+socks_port: 3090                     # 本地 SOCKS5 代理端口
+allow_external_connections: false    # 禁止局域网内其他设备连接本机代理
+vif_only: true                       # 仅使用虚拟网卡（VIF）模式接管流量
+block_quic: true                     # 全局阻断 QUIC(UDP 443)，强制回落 TCP 以便 MITM/分流；需要 QUIC 的策略组单独设 block_quic: false
+close_connections_on_policy_change: true  # 切换策略组时关闭已有连接，使新策略立即生效
+hide_vpn_icon: false                 # 不隐藏状态栏 VPN 图标
+hijack_dns:
+- '*:53'                             # 劫持所有 53 端口 DNS 请求，交由下方 dns 模块处理
+
+# GeoIP 数据库（Loyalsoldier 增强版）
+geoip_db_url: https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb
+
+# 延迟测试地址：代理走 gstatic 204，直连走 Apple 测试页
+proxy_latency_test_url: http://www.gstatic.com/generate_204
+direct_latency_test_url: http://www.apple.com/library/test/success.html
+
+# 不经过虚拟网卡的路由（私网/保留/组播段，避免内网与本机互联被接管）
+vif_excluded_routes:
+- 10.0.0.0/8
+- 172.16.0.0/12
+- 192.0.0.0/29                       # IETF 保留段，与 dns.block_ips 中的 192.0.0.0/24 保持一致
+- 192.168.0.0/16
+- 100.64.0.0/10                      # CGNAT / Tailscale 常用段
+- 169.254.0.0/16                     # 链路本地
+- 224.0.0.0/4                        # 组播
+- fc00::/7
+- fe80::/10
+- ff00::/8
+
+# 回环（Hairpin）地址：允许访问该地址时经 VIF 回环，用于内网穿透/自建服务场景
+vif_hairpin_addresses:
+- 10.7.0.1
+
+# ------------------------------------------
+# 二、DNS 模块
+# ------------------------------------------
+dns:
+  # 引导 DNS：用于解析 DoH/DoT 服务器自身的域名（必须为国内可直连的明文 IP）
+  bootstrap:
+  - 223.5.5.5                        # 阿里
+  - 119.29.29.29                     # 腾讯 DNSPod
+
+  # 上游 DNS 组：forward 规则通过组名引用
+  upstreams:
+    AliDNS:                          # 阿里系域名专用
+    - h3://dns.alidns.com/dns-query
+    - https://dns.alidns.com/dns-query
+    DNSPod:                          # 腾讯系 / 国内通用
+    - https://doh.pub/dns-query
+    - https://sm2.doh.pub/dns-query
+    ByteDNS:                         # 字节系域名专用（官方明文 UDP，无 DoH）
+    - udp://180.184.1.1:53
+    - udp://180.184.2.2:53
+    Google:                          # Google / YouTube 系域名专用
+    - h3://dns.google/dns-query
+    - https://dns.google/dns-query
+    Default:                         # 兜底（境外域名）：经代理隧道解析，国际 DoH 可用
+    - h3://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+    ProxyDNS:                        # 解析「代理节点服务器域名」专用；此时隧道尚未建立，必须国内优先
+    - h3://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+
+  # DNS 分流规则：自上而下首个命中生效，顺序不可随意调整
+  forward:
+  # ① DNS 层广告域名直接拒绝（Loyalsoldier 广告域名集；早于其他规则，节省无效解析）
+  #    与 rules 中的自建 AdBlock.yaml 分属不同解析阶段，互补而非重复
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+      value: reject
+      update_interval: 86400
+  # ② 阿里系 → AliDNS
+  - domain_suffix:
+      match: alibaba.com
+      value: AliDNS
+  - domain_suffix:
+      match: alipay.com
+      value: AliDNS
+  - domain_suffix:
+      match: alipayobjects.com
+      value: AliDNS
+  - domain_suffix:
+      match: aliapp.org
+      value: AliDNS
+  - domain_suffix:
+      match: alicdn.com
+      value: AliDNS
+  - domain_suffix:
+      match: aliyun.com
+      value: AliDNS
+  - domain_suffix:
+      match: aliyuncs.com
+      value: AliDNS
+  - domain_suffix:
+      match: taobao.com
+      value: AliDNS
+  - domain_suffix:
+      match: tmall.com
+      value: AliDNS
+  - domain_suffix:
+      match: amap.com
+      value: AliDNS
+  - domain_suffix:
+      match: ele.me
+      value: AliDNS
+  - domain_suffix:
+      match: dingtalk.com
+      value: AliDNS
+  - domain_suffix:
+      match: mzstatic.com            # Apple 静态资源 CDN，走国内解析以获得就近节点
+      value: AliDNS
+  # ③ 腾讯系 / 快手 / 小红书 → DNSPod
+  - domain_suffix:
+      match: qq.com
+      value: DNSPod
+  - domain_suffix:
+      match: wechat.com
+      value: DNSPod
+  - domain_suffix:
+      match: weixin.com
+      value: DNSPod
+  - domain_suffix:
+      match: tencent.com
+      value: DNSPod
+  - domain_suffix:
+      match: qcloud.com
+      value: DNSPod
+  - domain_suffix:
+      match: myqcloud.com
+      value: DNSPod
+  - domain_suffix:
+      match: tencdns.cn
+      value: DNSPod
+  - domain_suffix:
+      match: kuaishou.com
+      value: DNSPod
+  - domain_suffix:
+      match: gifshow.com
+      value: DNSPod
+  - domain_suffix:
+      match: yximgs.com
+      value: DNSPod
+  - domain_suffix:
+      match: kuaishoupay.com
+      value: DNSPod
+  - domain_suffix:
+      match: xiaohongshu.com
+      value: DNSPod
+  - domain_suffix:
+      match: xhscdn.com
+      value: DNSPod
+  # ④ 字节系 → ByteDNS
+  - domain_suffix:
+      match: bytedance.com
+      value: ByteDNS
+  - domain_suffix:
+      match: bytecdn.com
+      value: ByteDNS
+  - domain_suffix:
+      match: bytecdn.cn
+      value: ByteDNS
+  - domain_suffix:
+      match: bytedns.net
+      value: ByteDNS
+  - domain_suffix:
+      match: bytednsdoc.com
+      value: ByteDNS
+  - domain_suffix:
+      match: douyin.com
+      value: ByteDNS
+  - domain_suffix:
+      match: douyincdn.com
+      value: ByteDNS
+  - domain_suffix:
+      match: douyinvod.com
+      value: ByteDNS
+  - domain_suffix:
+      match: pstatp.com
+      value: ByteDNS
+  - domain_suffix:
+      match: amemv.com
+      value: ByteDNS
+  - domain_suffix:
+      match: toutiao.com
+      value: ByteDNS
+  - domain_suffix:
+      match: ixigua.com
+      value: ByteDNS
+  - domain_suffix:
+      match: isnssdk.com
+      value: ByteDNS
+  - domain_suffix:
+      match: awemeughun.com
+      value: ByteDNS
+  - domain_suffix:
+      match: byteimg.com
+      value: ByteDNS
+  - domain_suffix:
+      match: bytegoofy.com
+      value: ByteDNS
+  - domain_suffix:
+      match: toutiaocdn.com
+      value: ByteDNS
+  - domain_suffix:
+      match: douyinpic.com
+      value: ByteDNS
+  - domain_suffix:
+      match: douyinstatic.com
+      value: ByteDNS
+  - domain_suffix:
+      match: idouyinvod.com
+      value: ByteDNS
+  - domain_suffix:
+      match: iesdouyin.com
+      value: ByteDNS
+  # ⑤ 自建国内直连域名集 → DNSPod
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/Direct.yaml
+      value: DNSPod
+      update_interval: 604800
+  # ⑥ App Store 域名走境外 DNS（配合 Apple 策略组，避免解析到不匹配的 CDN）
+  - domain_suffix:
+      match: itunes.apple.com
+      value: Default
+  - domain_suffix:
+      match: apps.apple.com
+      value: Default
+  # ⑦ 本地/保留域名处理
+  #    顺序要点：home.arpa 与 lan 必须放在 arpa 之前，
+  #    否则 home.arpa 会被上层的 arpa 规则先行命中而被 reject
+  - domain_suffix:
+      match: lan
+      value: system                  # 局域网域名交给系统 DNS（路由器）解析
+  - domain_suffix:
+      match: home.arpa
+      value: system                  # RFC 8375 家庭网络域名，交给系统 DNS
+  - domain_suffix:
+      match: local
+      value: reject                  # mDNS 域名不走单播 DNS
+  - domain_suffix:
+      match: arpa
+      value: reject
+  - domain_suffix:
+      match: internal
+      value: reject
+  - domain_suffix:
+      match: test
+      value: reject
+  - domain_suffix:
+      match: example
+      value: reject
+  - domain_suffix:
+      match: localhost
+      value: reject
+  # ⑧ Google 系 → Google DNS（避免被国内 DNS 污染/错误解析）
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/YouTubeMusic.yaml
+      value: Google
+      update_interval: 604800
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/YouTube.yaml
+      value: Google
+      update_interval: 604800
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/Google.yaml
+      value: Google
+      update_interval: 604800
+  # ⑨ 兜底：.cn 走国内，其余全部走 Default（境外）
+  - domain_suffix:
+      match: cn
+      value: DNSPod
+  - domain_wildcard:
+      match: '*'
+      value: Default
+  # 解析代理节点服务器域名所用的 DNS 组（引用上方 ProxyDNS） 
+  proxy_nameservers:
+  - ProxyDNS
+
+  # 丢弃解析结果落在下列网段的响应（防 DNS 污染/劫持）
+  # 注意：含私网段，若自建域名公网 DNS 解析到内网 IP 会被拦截
+  block_ips:
+  - 0.0.0.0/8
+  - 10.0.0.0/8
+  - 127.0.0.0/8
+  - 169.254.0.0/16
+  - 172.16.0.0/12
+  - 192.0.0.0/24
+  - 192.0.2.0/24
+  - 192.88.99.0/24
+  - 192.168.0.0/16
+  - 198.18.0.0/15
+  - 198.51.100.0/24
+  - 203.0.113.0/24
+  - 224.0.0.0/4
+  - 240.0.0.0/4
+  - 255.255.255.255/32
+  - ::/128
+  - ::1/128
+  - ff00::/8
+  public_ip_lookup_url: https://ifconfig.me/ip   # 查询本机公网 IP 的地址
+  skip_tls_verify: false              # [优化] 显式声明不跳过 TLS 校验（安全最佳实践）
+
+# ------------------------------------------
+# 三、真实 IP 域名（不使用 Fake-IP 的域名）
+#    这些服务依赖真实 IP：局域网设备、NAS、路由器、游戏联机/NAT 检测、Apple 推送与证书校验等
+# ------------------------------------------
+real_ip_domains:
+# 局域网 / 家庭网络
+- '*.lan'
+- '*.local'
+- '*.home.arpa'
+- '*.tailscale.net'
+# Apple 基础服务（推送、证书校验、安全浏览）
+- '*.apple-dns.net'
+- '*.safebrowsing.apple'
+- setup.icloud.com
+- '*.push.apple.com'
+- ocsp.apple.com
+- ocsp2.apple.com
+# NAS / 路由器
+- find.synology.com
+- '*.synology.me'
+- '*.myqcloud.com'
+- '*.myqnapcloud.com'
+- '*.routerlogin.net'
+- '*.unifi.ui.com'
+- '*.gl-inet.com'
+- router.asus.com
+# 游戏平台（联机 / NAT 类型检测）
+- '*.battle.net'
+- '*.blzstatic.cn'
+- '*.battlenet.com'
+- '*.battlenet.com.cn'
+- '*.xboxlive.com'
+- xbox.*.microsoft.com
+- '*.stun.playstation.net'
+- '*.srv.nintendo.net'
+# 系统联网检测
+- '*.msftncsi.com'
+- '*.msftconnecttest.com'
+# 游戏 / 下载平台
+- '*.epicgames.com'
+- '*.riotgames.com'
+- '*.steampowered.com'
+- '*.steamcommunity.com'
+- '*.steamstatic.com'
+- '*.nvidia.com'

@@ -51,14 +51,28 @@ assert p['rules'][-1] == {'default': {'policy': '漏网之鱼'}}
 assert not any('default' in r for r in p['rules'][:-1])
 assert next(iter(groups['漏网之鱼'].values()))['policies'][:2] == ['DIRECT', '默认代理']
 assert next(iter(groups['Apple服务'].values()))['policies'][0] == 'DIRECT'
-assert p['dns']['forward'][0] == {'ssid': {'match': 'PHICOMM_5G', 'value': '10.0.0.1'}}
-assert p['dns']['forward'][-1]['domain_wildcard']['match'] == '*'
-assert p['dns']['hosts']['mtalk.google.com'] == '108.177.125.188'
+# Compare the complete supplied data, including exact DNS order, without applying
+# compatibility "fixes" the user explicitly declined.
+def read_yaml(path):
+    return json.loads(subprocess.run(['ruby', '-ryaml', '-rjson', '-e',
+        'puts JSON.generate(YAML.load_file(ARGV[0]))', str(path)],
+        check=True, capture_output=True, text=True).stdout)
+settings = read_yaml(ROOT / 'sources/user-settings.yaml')
+for key, value in settings.items():
+    assert p[key] == value, f'User setting changed: {key}'
+assert p['modules'] == read_yaml(ROOT / 'sources/user-modules.yaml')['modules']
+assert len(p['modules']) == 14 and all(m['enabled'] for m in p['modules'])
+assert p['dns']['proxy_nameservers'] == ['ProxyDNS']
+assert p['dns']['forward'][0]['proxy_rule_set']['match'] == 'https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt'
+assert p['dns']['forward'][-1] == {'domain_wildcard': {'match': '*', 'value': 'Default'}}
+assert len(p['dns']['forward']) == 64
+for rule in p['dns']['forward']:
+    assert next(iter(rule.values()))['value'] in set(p['dns']['upstreams']) | {'reject', 'system'}
 assert len(report['remote_rules']) == 53
 assert sum(r['mode'] == 'native-approved-replacement' for r in report['remote_rules']) == 5
 assert sum(r['mode'] == 'native-with-China-exclusions' for r in report['remote_rules']) == 1
 assert len(report['omitted_rules']) == 8 and len(report['plugins']) == 28
-assert p['modules'] == [] and p['proxies'] == []
+assert p['proxies'] == []
 speed = [r['and'] for r in p['rules'] if 'and' in r and r['and'].get('name') == 'Speedtest Intl']
 assert len(speed) == 1 and speed[0]['policy'] == 'Speedtest Intl'
 assert len(speed[0]['match'][1]['not']['match']['or']['match']) == 3
@@ -70,4 +84,4 @@ for resource in json.loads((ROOT / 'sources/resources.json').read_text()):
 # Ruby's regex engine accepts the source's scoped inline case-insensitive flags.
 checks = '''require 'yaml'; p=YAML.load_file(ARGV[0]); p['policy_groups'].each { |g| d=g.values.first; next unless d['filter']; r=Regexp.new(d['filter']); raise 'filter accepts placeholder' if r.match?('REJECT'); if d['name']=='香港手动策略'; raise unless r.match?('香港 01'); raise if r.match?('香港 游戏'); end }; puts 'regex filters passed' '''
 subprocess.run(['ruby', '-e', checks, str(ROOT / 'Egern_custom.yaml')], check=True)
-print(json.dumps({'status': 'passed', 'policy_groups': len(groups), 'rules': len(p['rules']), 'remote_sources': len(report['remote_rules']), 'device_tested': False}, ensure_ascii=False))
+print(json.dumps({'status': 'passed', 'policy_groups': len(groups), 'rules': len(p['rules']), 'remote_sources': len(report['remote_rules']), 'dns_forward_rules': len(p['dns']['forward']), 'user_settings_exact_match': True, 'enabled_modules': len(p['modules']), 'device_tested': False, 'full_schema_validated': False}, ensure_ascii=False))

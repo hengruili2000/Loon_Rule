@@ -671,5 +671,120 @@
   "unavailable_database_overrides": {
     "geoip-url": "https://geodata.kelee.one/Country-Masaiki.mmdb",
     "ipasn-url": "https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb"
-  }
+  },
+  "user_overrides": {
+    "source": "sources/user-settings.yaml",
+    "sha256": "bab73980b49731311b0db0b06fe39a602b2315eb593c8539a466ea6ea55ce8c4",
+    "top_level_keys": [
+      "ipv6",
+      "http_port",
+      "socks_port",
+      "allow_external_connections",
+      "vif_only",
+      "block_quic",
+      "close_connections_on_policy_change",
+      "hide_vpn_icon",
+      "hijack_dns",
+      "geoip_db_url",
+      "proxy_latency_test_url",
+      "direct_latency_test_url",
+      "vif_excluded_routes",
+      "vif_hairpin_addresses",
+      "dns",
+      "real_ip_domains"
+    ],
+    "dns_replacement": "whole-section; original Loon hosts and SSID DNS forwarding removed",
+    "compatibility_policy": "User explicitly requested exact values; do not expand ProxyDNS or convert reject.txt",
+    "geoip_db_url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb"
+  },
+  "user_modules": [
+    {
+      "name": "常用小组件",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Widget/Widgets.yaml",
+      "update_interval": 86400,
+      "env": {
+        "TEACHING_WEEK_START": "2026/08/31",
+        "EXCLUSIVE_NAME_2": "寒假",
+        "EXCLUSIVE_DATE_2": "01/23"
+      },
+      "enabled": true
+    },
+    {
+      "name": "Sub-Store",
+      "url": "https://raw.githubusercontent.com/sub-store-org/Sub-Store/refs/heads/master/config/Egern.yaml",
+      "update_interval": 259200,
+      "enabled": true
+    },
+    {
+      "name": "BoxJs",
+      "url": "https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.surge.sgmodule",
+      "update_interval": 259200,
+      "enabled": true
+    },
+    {
+      "name": "Script Hub",
+      "url": "https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/refs/heads/main/modules/script-hub.beta.egern.yaml",
+      "update_interval": 259200,
+      "enabled": true
+    },
+    {
+      "name": "WeatherKit",
+      "url": "https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.sgmodule",
+      "update_interval": 259200,
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mieqq/mieqq/master/skip-proxy-lists.sgmodule",
+      "enabled": true
+    },
+    {
+      "name": "雪球去广告",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/Xueqiu.yaml",
+      "update_interval": 86400,
+      "enabled": true
+    },
+    {
+      "name": "综合电商去广告",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/EcommerceAdBlock.yaml",
+      "update_interval": 86400,
+      "enabled": true
+    },
+    {
+      "name": "地图三合一去广告",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/MapAdBlock.yaml",
+      "update_interval": 86400,
+      "enabled": true
+    },
+    {
+      "name": "差旅出行去广告",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/TravelAdBlock.yaml",
+      "update_interval": 86400,
+      "enabled": true
+    },
+    {
+      "name": "音乐流媒体去广告",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/MusicAdBlock.yaml",
+      "update_interval": 604800,
+      "enabled": true
+    },
+    {
+      "name": "视频流媒体去广告",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/VideoAdBlock.yaml",
+      "update_interval": 86400,
+      "enabled": true
+    },
+    {
+      "name": "京东比价",
+      "url": "https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Module/JDPrice.yaml",
+      "update_interval": 86400,
+      "enabled": true
+    },
+    {
+      "name": "App开屏广告跳过",
+      "url": "https://yfamilys.com/module/adultraplus.sgmodule",
+      "update_interval": 86400,
+      "enabled": true
+    }
+  ],
+  "user_modules_source_sha256": "bc428978d06bbbfeb71cf29005347c2cf05d2a839bfd89de8deb91e70a659280"
 }

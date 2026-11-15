@@ -193,16 +193,33 @@ profile['modules'] = []
 # No CA existed in the source. Leave CA generation and trust to Egern.
 profile['mitm'] = {'hostnames': {'includes': [], 'excludes': []}}
 
-json_text = json.dumps(profile, ensure_ascii=False)
+# Explicit user settings replace the corresponding top-level sections in full.
+# Preserve their source text, comments, values and DNS rule order verbatim.
+def read_yaml(path):
+    return json.loads(subprocess.run(['ruby', '-ryaml', '-rjson', '-e',
+        'puts JSON.generate(YAML.load_file(ARGV[0]))', str(path)],
+        capture_output=True, text=True, check=True).stdout)
+
+settings_path = ROOT / 'sources/user-settings.yaml'
+modules_path = ROOT / 'sources/user-modules.yaml'
+user_settings = read_yaml(settings_path)
+user_modules = read_yaml(modules_path)['modules']
+profile.update(user_settings)
+profile['modules'] = user_modules
+remainder = {k: v for k, v in profile.items() if k not in user_settings and k != 'modules'}
+json_text = json.dumps(remainder, ensure_ascii=False)
 yaml = subprocess.run(['ruby', '-rjson', '-ryaml', '-e', 'STDOUT.write(YAML.dump(JSON.parse(STDIN.read)))'], input=json_text, text=True, capture_output=True, check=True).stdout
 header = '''# Loon_custom.lcf → Egern；转换日期 2026-11-16（Asia/Taipei）。
 # 导入后先向「节点订阅」添加订阅并选择地区节点；原文件不含任何订阅。
-# 适用于支持 conditional / flatten / DNS SSID 的当前 Egern；尚未经过设备实测。
+# 通用设置、DNS、real_ip_domains 按用户提供内容原样覆盖，另启用指定的 14 个模块。
+# 保留用户指定的 ProxyDNS 组名写法及 Clash reject.txt 链接，未作兼容改写。
+# 尚未经过 Egern 客户端实测；完整差异和已知待验证项见 README.md。
 # 远程 .list 保留原来源并每 8 小时更新；内嵌规则需重新运行转换脚本更新。
-# 28 个原 Loon 插件因资源 HTTP 403 尚未迁移；详见 README.md。
-# 原自定义 GeoIP/ASN 下载也返回 403，未覆盖 Egern 自带数据库。
 '''
-(ROOT / 'Egern_custom.yaml').write_text(header + yaml)
+rendered = (header + settings_path.read_text().rstrip() + '\n\n'
+            + modules_path.read_text().rstrip() + '\n\n'
+            + yaml.removeprefix('---\n'))
+(ROOT / 'Egern_custom.yaml').write_text(rendered)
 plugins = []
 for line in sections['Plugin']:
     fields = split_csv(line); opt = dict(x.split('=', 1) for x in fields[1:])
@@ -214,6 +231,15 @@ report = {'date': '2026-11-16', 'timezone': 'Asia/Taipei',
           'policy_groups': len(groups), 'rules': len(rules), 'remote_rules': remote_report,
           'omitted_rules': skipped, 'normalized_cidrs': normalized, 'plugins': plugins,
           'unmapped_general_fields': ['sni-sniffing', 'dns-reject-mode', 'domain-reject-mode', 'udp-fallback-mode', 'interface-mode', 'test-timeout', 'resource-parser'],
-          'unavailable_database_overrides': {k: general[k] for k in ['geoip-url', 'ipasn-url']}}
+          'unavailable_database_overrides': {k: general[k] for k in ['geoip-url', 'ipasn-url']},
+          'user_overrides': {
+              'source': 'sources/user-settings.yaml',
+              'sha256': hashlib.sha256(settings_path.read_bytes()).hexdigest(),
+              'top_level_keys': list(user_settings),
+              'dns_replacement': 'whole-section; original Loon hosts and SSID DNS forwarding removed',
+              'compatibility_policy': 'User explicitly requested exact values; do not expand ProxyDNS or convert reject.txt',
+              'geoip_db_url': user_settings['geoip_db_url']},
+          'user_modules': user_modules,
+          'user_modules_source_sha256': hashlib.sha256(modules_path.read_bytes()).hexdigest()}
 (ROOT / 'conversion-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
-print(json.dumps({'groups': len(groups), 'rules': len(rules), 'remote_sources': len(remote_report), 'unsupported_process_rules': len(skipped), 'unconverted_plugins': len(plugins), 'bytes': len((header + yaml).encode())}, ensure_ascii=False))
+print(json.dumps({'groups': len(groups), 'rules': len(rules), 'remote_sources': len(remote_report), 'unsupported_process_rules': len(skipped), 'original_unconverted_plugins': len(plugins), 'user_modules': len(user_modules), 'bytes': len(rendered.encode())}, ensure_ascii=False))

@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-16",
+  "timezone": "Asia/Taipei",
+  "checks": [
+    {
+      "label": "widgets",
+      "ok": true,
+      "sha": "e37267373305396eec602ebf10b8f7f101ffec21",
+      "size": 7437
+    },
+    {
+      "label": "sub-store",
+      "ok": true,
+      "sha": "0d530df5208924dba393c97e5e3c14c3278829a5",
+      "size": 2985
+    },
+    {
+      "label": "boxjs",
+      "ok": true,
+      "sha": "b4d0c6c98165a855aa766c110a3cd7dbba817cb0",
+      "size": 577
+    },
+    {
+      "label": "script-hub",
+      "ok": true,
+      "sha": "cf2fbba42cec629109b16a61786bab4f3b71b7c3",
+      "size": 1440
+    },
+    {
+      "label": "skip-proxy",
+      "ok": true,
+      "sha": "765876ad08fe02c5cbcaf151069e8a6ffcd83052",
+      "size": 789
+    },
+    {
+      "label": "Xueqiu",
+      "ok": true,
+      "sha": "3c0703a88d512fd32c1f33eba783fdfccbed0d0b",
+      "size": 3049
+    },
+    {
+      "label": "EcommerceAdBlock",
+      "ok": true,
+      "sha": "e960fd34eb3bedcbe5482c84f1502877e518af0e",
+      "size": 5187
+    },
+    {
+      "label": "MapAdBlock",
+      "ok": true,
+      "sha": "948408b997a51da2565038ddeb03e977bd6569cd",
+      "size": 5167
+    },
+    {
+      "label": "TravelAdBlock",
+      "ok": true,
+      "sha": "1052b6bb773a4a961255b41140e69787020a0a11",
+      "size": 5206
+    },
+    {
+      "label": "MusicAdBlock",
+      "ok": true,
+      "sha": "9b8df0c9cb156b5649a1a62013c558eada104f6c",
+      "size": 11105
+    },
+    {
+      "label": "VideoAdBlock",
+      "ok": true,
+      "sha": "6ad3cc238dc9e9049edcf3d76a82832ae07b27ab",
+      "size": 5408
+    },
+    {
+      "label": "JDPrice",
+      "ok": true,
+      "sha": "0fdd9e78573e3d5b6431bcd587bf12ac293a65c1",
+      "size": 841
+    },
+    {
+      "label": "WeatherKit",
+      "ok": true,
+      "http_status": "200"
+    },
+    {
+      "label": "App开屏广告跳过",
+      "ok": true,
+      "http_status": "200"
+    }
+  ],
+  "scope": "Public module resource availability only; no Egern runtime or script-function validation",
+  "user_settings_exact": true,
+  "compatibility_changes_declined": [
+    "Expanding ProxyDNS to DNS server addresses",
+    "Converting Loyalsoldier Clash reject.txt into an Egern rule set"
+  ]
+}
