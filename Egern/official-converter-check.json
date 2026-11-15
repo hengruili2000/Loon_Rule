@@ -1,0 +1,9 @@
+{
+  "official_converter_url": "https://gen.egernapp.com/",
+  "wasm_sha256": "5a57692f8e71b0e005af69caa00974fc422711395a511e6473e1bb8b34c0892d",
+  "live_resources_accepted": 45,
+  "native_logic_conversion_required": [
+    "Category-Dev AND/NOT wildcard condition is converted explicitly; official converter alone drops unsupported conditions"
+  ],
+  "device_tested": false
+}

@@ -1,0 +1,219 @@
+# Loon 自定义配置。服务策略可选择默认代理或手动场景。漏网之鱼默认使用 DIRECT，也可手动选择地区场景。连接 PHICOMM_5G 时，场景策略使用 DIRECT。
+# Date: 2025-11-08 00:21:37
+# Author: https://t.me/iKeLee
+# 更多插件可前往 https://hub.kelee.one 安装
+
+[General]
+ip-mode=v4-only
+ipv6-vif=off
+dns-server = 119.29.29.29,223.5.5.5
+doh-server = https://dns.alidns.com/dns-query,https://doh.pub/dns-query
+sni-sniffing=true
+disable-stun=true
+dns-reject-mode=LoopbackIP
+domain-reject-mode=DNS
+udp-fallback-mode=REJECT
+wifi-access-http-port=7222
+wifi-access-socks5-port=7221
+allow-wifi-access=false
+interface-mode=auto
+test-timeout=5
+disconnect-on-policy-change = true
+internet-test-url=http://connectivitycheck.platform.hicloud.com/generate_204
+proxy-test-url=http://www.gstatic.com/generate_204
+resource-parser=https://raw.githubusercontent.com/sub-store-org/Sub-Store/release/sub-store-parser.loon.min.js
+geoip-url=https://geodata.kelee.one/Country-Masaiki.mmdb
+ipasn-url=https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
+skip-proxy = 127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,100.64.0.0/10,localhost,*.local,passenger.t3go.cn,captive.apple.com,e.crashlynatics.com
+real-ip = msftconnecttest.com,msftncsi.com,*.msftconnecttest.com,*.msftncsi.com,*.srv.nintendo.net,*.stun.playstation.net,xbox.*.microsoft.com,*.xboxlive.com,*.battlenet.com.cn,*.battlenet.com,*.blzstatic.cn,*.battle.net
+bypass-tun=10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32
+
+[Proxy]
+# 可在 Loon 中添加本地节点。
+
+[Remote Proxy]
+# 导入后请在 Loon 中添加自己的订阅。
+
+[Remote Filter]
+香港节点=NameRegex, FilterKey="^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+台湾节点=NameRegex, FilterKey="^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+日本节点=NameRegex, FilterKey="^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+韩国节点=NameRegex, FilterKey="^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+新国节点=NameRegex, FilterKey="^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+美国节点=NameRegex, FilterKey="^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$"
+游戏节点=NameRegex, FilterKey="^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$"
+全球节点=NameRegex, FilterKey="^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
+
+[Proxy Group]
+# 默认代理与服务分流
+默认代理=select, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/proxy.png
+TikTok=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/tiktok.png
+AI=select, 默认代理, 美国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/ai.png
+Speedtest Intl=select, 默认代理, 全球手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/speedtest.png
+Netflix=select, 默认代理, 新国手动场景, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/netflix.png
+Apple TV=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/apple-tv.png
+Apple服务=select, DIRECT, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/apple-services.png
+Spotify=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/spotify.png
+社交媒体=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/social-media.png
+国际媒体=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/international-media.png
+加密货币=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/cryptocurrency.png
+开发者服务=select, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, 全球手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/developer.png
+漏网之鱼=select, DIRECT, 默认代理, 香港手动场景, 台湾手动场景, 日本手动场景, 韩国手动场景, 新国手动场景, 美国手动场景, img-url=https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/icons/liquid-glass/final.png
+
+# --------------------------------
+# 地区策略
+香港手动策略=select, 香港节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
+台湾手动策略=select, 台湾节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
+日本手动策略=select, 日本节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+韩国手动策略=select, 韩国节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+新国手动策略=select, 新国节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+美国手动策略=select, 美国节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+全球手动策略=select, 全球节点, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
+# --------------------------------
+# 场景策略
+香港手动场景=ssid, default=香港手动策略, cellular=香港手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+台湾手动场景=ssid, default=台湾手动策略, cellular=台湾手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+日本手动场景=ssid, default=日本手动策略, cellular=日本手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+韩国手动场景=ssid, default=韩国手动策略, cellular=韩国手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+新国手动场景=ssid, default=新国手动策略, cellular=新国手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+美国手动场景=ssid, default=美国手动策略, cellular=美国手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+全球手动场景=ssid, default=全球手动策略, cellular=全球手动策略, "PHICOMM_5G"=DIRECT, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
+
+[Rule]
+# 当配置文件中没有任何有效策略组时，Loon将使用内置的PROXY策略组
+# 当配置文件中存在有效的策略组时，内置的PROXY策略组将不再允许被调用，仅可使用用户配置的策略组
+# 配置文件已自带远程GEOIP, cn, DIRECT规则，请勿在此添加
+# 请勿修改远程CN REGION规则的排序甚至删除
+IP-CIDR, 28.0.0.1/8, DIRECT
+IP-CIDR, 198.18.0.1/16, DIRECT
+IP-CIDR, 198.18.0.0/15, DIRECT
+IP-CIDR6, fc00::/18, DIRECT
+# Bahamut：仅使用 blackmatrix7 上游规则中的巴哈姆特专属域名
+DOMAIN,bahamut.akamaized.net, 社交媒体
+DOMAIN-SUFFIX,bahamut.com.tw, 社交媒体
+DOMAIN-SUFFIX,gamer.com.tw, 社交媒体
+FINAL, 漏网之鱼
+
+[Remote Rule]
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Custom_US_Proxy.list, policy=美国手动场景, tag=Custom US Proxy, enabled=true
+https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=TikTok, tag=TikTok, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-ai-!cn.list, policy=AI, tag=AI, enabled=true
+https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=Speedtest Intl, tag=Speedtest Intl, enabled=true
+https://rule.kelee.one/Loon/Netflix.lsr, policy=Netflix, tag=Netflix, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleTV/AppleTV.list, policy=Apple TV, tag=Apple TV, enabled=true
+https://rule.kelee.one/Loon/Spotify.lsr, policy=Spotify, tag=Spotify, enabled=true
+# 社交媒体（blackmatrix7）
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/4chan/4chan.list, policy=社交媒体, tag=社交媒体 - 4chan, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Clubhouse/Clubhouse.list, policy=社交媒体, tag=社交媒体 - Clubhouse, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list, policy=社交媒体, tag=社交媒体 - Discord, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disqus/Disqus.list, policy=社交媒体, tag=社交媒体 - Disqus, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Facebook/Facebook.list, policy=社交媒体, tag=社交媒体 - Facebook, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hkgolden/Hkgolden.list, policy=社交媒体, tag=社交媒体 - Hkgolden, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Imgur/Imgur.list, policy=社交媒体, tag=社交媒体 - Imgur, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=社交媒体, tag=社交媒体 - Instagram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/KakaoTalk/KakaoTalk.list, policy=社交媒体, tag=社交媒体 - KakaoTalk, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Line/Line.list, policy=社交媒体, tag=社交媒体 - Line, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/LinkedIn/LinkedIn.list, policy=社交媒体, tag=社交媒体 - LinkedIn, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pinterest/Pinterest.list, policy=社交媒体, tag=社交媒体 - Pinterest, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list, policy=社交媒体, tag=社交媒体 - Pixiv, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixnet/Pixnet.list, policy=社交媒体, tag=社交媒体 - Pixnet, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Reddit/Reddit.list, policy=社交媒体, tag=社交媒体 - Reddit, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Snap/Snap.list, policy=社交媒体, tag=社交媒体 - Snap, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Stackexchange/Stackexchange.list, policy=社交媒体, tag=社交媒体 - Stackexchange, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=社交媒体, tag=社交媒体 - Telegram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramNL/TelegramNL.list, policy=社交媒体, tag=社交媒体 - TelegramNL, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramSG/TelegramSG.list, policy=社交媒体, tag=社交媒体 - TelegramSG, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list, policy=社交媒体, tag=社交媒体 - TelegramUS, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Threads/Threads.list, policy=社交媒体, tag=社交媒体 - Threads, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TruthSocial/TruthSocial.list, policy=美国手动场景, tag=社交媒体 - TruthSocial, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list, policy=社交媒体, tag=社交媒体 - Tumblr, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=社交媒体, tag=社交媒体 - Twitter, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/VK/VK.list, policy=社交媒体, tag=社交媒体 - VK, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list, policy=社交媒体, tag=社交媒体 - Whatsapp, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zalo/Zalo.list, policy=社交媒体, tag=社交媒体 - Zalo, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list, policy=社交媒体, tag=社交媒体 - Twitch, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Niconico/Niconico.list, policy=社交媒体, tag=社交媒体 - Niconico, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list, policy=社交媒体, tag=社交媒体 - Dailymotion, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Civitai/Civitai.list, policy=社交媒体, tag=社交媒体 - Civitai, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list, policy=社交媒体, tag=社交媒体 - Patreon, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list, policy=开发者服务, tag=开发者服务, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple.list, policy=Apple服务, tag=Apple服务, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list, policy=Apple服务, tag=Apple服务 - Domain, enabled=true
+https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr, policy=DIRECT, tag=LAN, enabled=true
+https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGION, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-cryptocurrency.list, policy=加密货币, tag=加密货币, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-media.list, policy=国际媒体, tag=国际媒体 - category-media, enabled=true
+https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-entertainment.list, policy=国际媒体, tag=国际媒体 - category-entertainment, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list, policy=默认代理, tag=海外兜底 - Proxy, enabled=true
+https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy_Domain.list, policy=默认代理, tag=海外兜底 - Proxy Domain, enabled=true
+# 国内直连兜底：始终保持在远程规则列表末尾
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=ChinaMax, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list, policy=DIRECT, tag=ChinaMax - Domain, enabled=true
+
+
+[Host]
+ssid: PHICOMM_5G=server: 10.0.0.1
+*.126.com = server:119.29.29.29
+*.126.net = server:119.29.29.29
+*.127.net = server:119.29.29.29
+*.163.com = server:119.29.29.29
+*.alicdn.com = server:223.5.5.5
+*.aliyun.com = server:223.5.5.5
+*.bilibili.com = server:119.29.29.29
+*.jd.com = server:119.28.28.28
+*.mi.com = server:119.29.29.29
+*.netease.com = server:119.29.29.29
+*.qq.com = server:119.28.28.28
+*.taobao.com = server:223.5.5.5
+*.tencent.com = server:119.28.28.28
+*.tmall.com = server:223.5.5.5
+*.weixin.com = server:119.28.28.28
+*.xiaomi.com = server:119.29.29.29
+*testflight.apple.com = server:8.8.4.4
+dl.google.com = server:119.29.29.29
+dl.l.google.com = server:119.29.29.29
+mtalk.google.com = 108.177.125.188
+11612bj3-b76c.aws-agent.biz = 06996bj6-79x5.apt-agent.com
+b76c5sh0-fde6.aws-agent.biz = 08233sh6-12d1.apt-agent.com
+fde63gz6-1y61.aws-agent.biz = 09571gz6-86k1.apt-agent.com
+
+[Rewrite]
+
+[Script]
+
+[Plugin]
+https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, pin=true, enabled=true
+https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, pin=true, enabled=true
+https://kelee.one/Tool/Loon/Lpx/QuickSearch.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx, policy=默认代理, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Node_detection_tool.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx, policy=默认代理, enabled=false
+https://kelee.one/Tool/Loon/Lpx/BoxJs.lpx, policy=默认代理, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx, policy=默认代理, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, policy=默认代理, enabled=true
+https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/RedPaper_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Weibo_intl_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/NeteaseCloudMusic_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/SF-Express_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/PinDuoDuo_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Jin10Data_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/AlcidaeVideo_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/FlyerTea_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/DiDi_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Weixin_external_links_unlock.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Taobao_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/AppleWeatherEnhancer.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/12306_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/JD_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Cainiao_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
+
+[Mitm]
+hostname=
+ca-p12=
+ca-passphrase=
+skip-server-cert-verify=false

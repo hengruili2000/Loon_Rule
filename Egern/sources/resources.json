@@ -1,0 +1,434 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Custom_US_Proxy.list",
+    "role": "original",
+    "path": "sources/resources/9eba5dbdcb222761.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "a8fbe304b323e4829ef8cf2baf3daff33f68446e14c275fbe4d4858226694de6"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+    "role": "original",
+    "path": "sources/resources/7379db10efbd06c3.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "3908ec440074d7a311633e92c130bc7e481697a3e80abe7ac205800cd98df653"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-ai-!cn.list",
+    "role": "original",
+    "path": "sources/resources/750881b4b98abc62.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "769b93196fa6c9295f891668f8cc63dfc22bb750d1c369fbbb64a1399d58322b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleTV/AppleTV.list",
+    "role": "original",
+    "path": "sources/resources/648ebe4030800522.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "765c3689f99b10b2fa8a3910747676ac0a75b98869e1e0f9962bfe1121307f69"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/4chan/4chan.list",
+    "role": "original",
+    "path": "sources/resources/e13c2d7cf44a4fa4.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "4adf1d2344ee7fe10f753c1fd63d0b7ffe94280308ff3cc51b88cf04d117d759"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Clubhouse/Clubhouse.list",
+    "role": "original",
+    "path": "sources/resources/08703eb0c757cf87.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "3158d557bfd3b7c55d4fc774b0d3988ffb3cf0aa24bc3f19b1df0df5635f7ac8"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list",
+    "role": "original",
+    "path": "sources/resources/48c11b0fde695e04.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "3d18c8fe716de06891ba3d6c34dba254cb65138a10f79e1a1a0628b5237ecb2c"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disqus/Disqus.list",
+    "role": "original",
+    "path": "sources/resources/10a717fdeb8c7550.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "b763f106b7c4da1ebd09bfbfbea9b2f4c398d012d171b8db9b18033f743b9482"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Facebook/Facebook.list",
+    "role": "original",
+    "path": "sources/resources/3c74861d721bd8e8.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "39b012e0dd7b4f824a9388a27229b05b2c1bf8fb870ced8846f853dfc5752381"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hkgolden/Hkgolden.list",
+    "role": "original",
+    "path": "sources/resources/999617fc1885d282.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "ee629c0080c036f283976c36cf80446e44a6f2a3ab00b642ca0ac22254e2be0f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Imgur/Imgur.list",
+    "role": "original",
+    "path": "sources/resources/670b8c3a53e933ae.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "75f527e8d9686b4c417c14e0c5828c0944491e609a7832581156be97f0927a8a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list",
+    "role": "original",
+    "path": "sources/resources/13561a3825a93de3.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "65f28f9253b0dbb2a81485c788537896a0817766685e7bd91b2f90ec7aa19548"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/KakaoTalk/KakaoTalk.list",
+    "role": "original",
+    "path": "sources/resources/7c8df3980163af7f.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "535a2ac2a9a909c04a0fa35bd8b58ec367a299259320a2dd966386bb72642fe8"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Line/Line.list",
+    "role": "original",
+    "path": "sources/resources/e63bc973991fcc71.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "d13bdaa601bdf37d20dfaf04c2561a06eb9067a81fcd407183730272a0264c92"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/LinkedIn/LinkedIn.list",
+    "role": "original",
+    "path": "sources/resources/4e488c54b48d9677.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "660570f6613cc81ad4c590b18550a5235b1e7636ecc3ef3f90b8edf600f30134"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pinterest/Pinterest.list",
+    "role": "original",
+    "path": "sources/resources/b556bdd699db1a7f.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "fec5616657771b81c750c5be622ae206a4ce2cc8e16c8a5debd53826ea575df3"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list",
+    "role": "original",
+    "path": "sources/resources/2d7627ccda3b296a.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "c8d9cce7aa65eeb4369e32191b9a4cf3c5457ecdb7f7e68864b3dd69f4b3ae4d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixnet/Pixnet.list",
+    "role": "original",
+    "path": "sources/resources/01453c99b0b4df97.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "40412085b70221ceac2702f904c86db2117a672ea5ab92bfe314aa695eca8ab2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Reddit/Reddit.list",
+    "role": "original",
+    "path": "sources/resources/dc4240cc0b9e2a9c.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "8437bd0bbf3214170f6601f3a9b34d45a7684c9e9f8d7554b608142be8a2e80b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Snap/Snap.list",
+    "role": "original",
+    "path": "sources/resources/d5a0d9ad78c75b2c.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "67e1a466e52a4fca448559566363bd4c221f612ce167642a149f4a070485aaff"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Stackexchange/Stackexchange.list",
+    "role": "original",
+    "path": "sources/resources/bedb5ea33007def0.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "b28ee9e299a54d23464ad38e6245fb7416d8a5f972be9d7d56a908bee4adbae3"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list",
+    "role": "original",
+    "path": "sources/resources/369918e1acd253dc.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "f4b423def4d7e47e99f668e76594ec670b552888b9e1ad23a7adbc65e7400887"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramNL/TelegramNL.list",
+    "role": "original",
+    "path": "sources/resources/d58e493599fcb232.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "ec8553a2fc0a746f11d9354adb3b4cafdd282f65f79b0f95e75098f8ef9e13e7"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramSG/TelegramSG.list",
+    "role": "original",
+    "path": "sources/resources/2baef0980cfc8f3c.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "d8cb4d467de3fc8639a78809ecf0360dfaf80170c80e33d77ac7b06f92a33c9f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list",
+    "role": "original",
+    "path": "sources/resources/9be8d926988fcd84.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "94409ae4c48b9fca00cf2ea6ab7ca066b6beb666f2f68cdacb949b1697752238"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Threads/Threads.list",
+    "role": "original",
+    "path": "sources/resources/347ba61982467526.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "e9b86a51952a33ee50ad3b31dc98bcb09699bbeb4d21371762b1124cb0091e86"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TruthSocial/TruthSocial.list",
+    "role": "original",
+    "path": "sources/resources/7f7d30ccf8b07123.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "3f495ed553bca611960740ddde277ae656aff7da8f65a05d0848904ce4a9fc3f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list",
+    "role": "original",
+    "path": "sources/resources/c224afd290600498.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "5a7c922263c12cc73599b655d9a99f339698f35e1c1d9c40bb6141a288c33d90"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list",
+    "role": "original",
+    "path": "sources/resources/7403b8cb25630233.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "64c836f2431ca0d4728cc545bb74280ee50c886e346040012e6cdd2f3eee3f97"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/VK/VK.list",
+    "role": "original",
+    "path": "sources/resources/c3abd14caab39ee5.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "f42c2fcba98ec06ace64bc48c0f6a43dbee3fdb809b0d8e31d3ce0e78491a1f8"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list",
+    "role": "original",
+    "path": "sources/resources/be3b105b4ad0b10e.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "644fd145b484079ff65f681deb17a6dbf1aff620afea56b1a3c24d29d9f9db4f"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zalo/Zalo.list",
+    "role": "original",
+    "path": "sources/resources/ccac8223ce1adc5e.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "b82957e9dbe8581f9fb76ba97c8b4efabdf8de8ccbba8c374302a7a69f8171f0"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list",
+    "role": "original",
+    "path": "sources/resources/c21bc15af9e0572b.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "8b7853e6f60df358bdf49aa64acd682c2937bc1e155aa23a3a5b2c22c198818d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Niconico/Niconico.list",
+    "role": "original",
+    "path": "sources/resources/b538adb5ff9f31a2.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "88c2662a8ebcffaf6d6a5b92ebbc1368eb13dc87e998cb4d29ba8f5a23e5f8bd"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list",
+    "role": "original",
+    "path": "sources/resources/5b7b4746264d313d.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "7dac1624b3a50d4d2b110d3d3d30d94c578ab8294275b4279d36b1174a8377af"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Civitai/Civitai.list",
+    "role": "original",
+    "path": "sources/resources/1ddff4be6fbed775.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "76f0b25371919791d7d90fee7a4e7a57b9a02675dccbad14034e36b3d317f949"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list",
+    "role": "original",
+    "path": "sources/resources/7c026c847828920d.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "063df1cd0590be44eb9656699966aa0b92c2deadfcf50288209e2870136ad291"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
+    "role": "original",
+    "path": "sources/resources/a1ae95234f6b7c8a.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "2a80308d2360e73d26c83c7027f4e0d478fefe725307448bf931cc5f02cd670a"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple.list",
+    "role": "original",
+    "path": "sources/resources/0a25351b94cfaaec.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "debc1c44214ca640c4f426fd27e735349e3a87ebce2810ae9a04fba7017d5f2b"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list",
+    "role": "original",
+    "path": "sources/resources/7d80ce68bc207f37.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "b2686f63cab575aa3c408277efa15fe45c726a847f53cbcf7285f1d82bf8fc9c"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-cryptocurrency.list",
+    "role": "original",
+    "path": "sources/resources/83eb34847d20189e.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "20f8508812d98471cdeaa1547075046b841ea9acce167de6aa1e062a8caf1c5d"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-media.list",
+    "role": "original",
+    "path": "sources/resources/88f443ca889db4b6.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "e7acec0fe63bf0d8bb17c574f49204f0cecc794c16eb48d49f28e085f6fafd55"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-entertainment.list",
+    "role": "original",
+    "path": "sources/resources/f3255facbdd060dc.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "c27ebab7d33cbe6c997db8f73a90a4c5c49458a16f784660d69c8b194e760459"
+  },
+  {
+    "url": "https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list",
+    "role": "original",
+    "path": "sources/resources/f87680a640b91e19.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "5963ff4f8bd4d3452f95bfdb677c42e03f8d6add2cfbf76ba1638e4c0a776a3c"
+  },
+  {
+    "url": "https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy_Domain.list",
+    "role": "original",
+    "path": "sources/resources/810cc850e17f9103.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "441b40e8644ebd93fcc1fedd66a8619d7ebef159c340c79f29fbde43686146c5"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list",
+    "role": "original",
+    "path": "sources/resources/dcfdb5b8fd811310.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "e1f2ae90288bd4c5fba296515107d3713fd6f48524b4c95b0ecb6d973afface3"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list",
+    "role": "original",
+    "path": "sources/resources/7dcac5b40d01be69.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "be6979fff8263d774cd611c806b0d1903b3ec3fccdcdd39c11870e60d609c7a4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
+    "role": "TikTok",
+    "path": "sources/resources/8e895c29543ac66a.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "e61af08425f87c1bc81216364c0f8fffbfc0a9924aab89f133151f1ea56de6c2"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
+    "role": "Netflix",
+    "path": "sources/resources/edd13aa620799653.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "aa03f015949e8f6f981d90a7d8b1acf7e88472ee48601632bd964b0bb740f8aa"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
+    "role": "Spotify",
+    "path": "sources/resources/d38399433baa03db.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "33bd52e8f23cda9374876259621c8fba21554035e20fa55daffbfcaee2109079"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list",
+    "role": "Lan",
+    "path": "sources/resources/e3723e365eb6847f.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "65decf7849f37cbc66cff8e1155ea1d6344c748c6ead772db2f9e9c7e6a1d546"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list",
+    "role": "China",
+    "path": "sources/resources/a55d1ba921e997ed.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "15890ccb51dbc91f61aefb4fd4634c8cc030be7f2dc273dfd9e363e6d99e1451"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list",
+    "role": "Speedtest",
+    "path": "sources/resources/f03d437119b7f18d.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "d0f9a3b0befdfd209bf752b86e561094f7bb7e81d96e1df86c2ba585535ba755"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax.list",
+    "role": "ChinaMax",
+    "path": "sources/resources/1439857af2375a29.txt",
+    "ok": true,
+    "error": "",
+    "sha256": "76e105405da7d57c53f783cbafa7f6bcf7e893df5934dc5da75f64085f7ccdbc"
+  }
+]

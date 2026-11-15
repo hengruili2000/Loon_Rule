@@ -1,0 +1,675 @@
+{
+  "date": "2026-11-16",
+  "timezone": "Asia/Taipei",
+  "source_url": "https://github.com/hengruili2000/Loon_Rule/blob/main/Loon_custom.lcf",
+  "source_blob_sha": "a1a224ed582cb5b94ece3a420440f6ef8f533d2f",
+  "source_sha256": "50ffcf59a6c4f77e160a1b382c01c4418934789719d363a4d4392fc185403a92",
+  "policy_groups": 28,
+  "rules": 2221,
+  "remote_rules": [
+    {
+      "tag": "Custom US Proxy",
+      "policy": "美国手动场景",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Custom_US_Proxy.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Custom_US_Proxy.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "TikTok",
+      "policy": "TikTok",
+      "original_url": "https://kelee.one/Tool/Loon/Lsr/TikTok.lsr",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
+      "mode": "native-approved-replacement"
+    },
+    {
+      "tag": "Anthropic",
+      "policy": "AI",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "mode": "native-snapshot"
+    },
+    {
+      "tag": "AI",
+      "policy": "AI",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-ai-!cn.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-ai-!cn.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "Speedtest Intl",
+      "policy": "Speedtest Intl",
+      "original_url": "https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list",
+      "mode": "native-with-China-exclusions"
+    },
+    {
+      "tag": "Netflix",
+      "policy": "Netflix",
+      "original_url": "https://rule.kelee.one/Loon/Netflix.lsr",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
+      "mode": "native-approved-replacement"
+    },
+    {
+      "tag": "Apple TV",
+      "policy": "Apple TV",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleTV/AppleTV.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/AppleTV/AppleTV.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "Spotify",
+      "policy": "Spotify",
+      "original_url": "https://rule.kelee.one/Loon/Spotify.lsr",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
+      "mode": "native-approved-replacement"
+    },
+    {
+      "tag": "社交媒体 - 4chan",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/4chan/4chan.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/4chan/4chan.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Clubhouse",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Clubhouse/Clubhouse.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Clubhouse/Clubhouse.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Discord",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Disqus",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disqus/Disqus.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disqus/Disqus.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Facebook",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Facebook/Facebook.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Facebook/Facebook.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Hkgolden",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hkgolden/Hkgolden.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hkgolden/Hkgolden.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Imgur",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Imgur/Imgur.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Imgur/Imgur.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Instagram",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - KakaoTalk",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/KakaoTalk/KakaoTalk.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/KakaoTalk/KakaoTalk.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Line",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Line/Line.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Line/Line.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - LinkedIn",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/LinkedIn/LinkedIn.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/LinkedIn/LinkedIn.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Pinterest",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pinterest/Pinterest.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pinterest/Pinterest.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Pixiv",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Pixnet",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixnet/Pixnet.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixnet/Pixnet.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Reddit",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Reddit/Reddit.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Reddit/Reddit.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Snap",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Snap/Snap.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Snap/Snap.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Stackexchange",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Stackexchange/Stackexchange.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Stackexchange/Stackexchange.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Telegram",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - TelegramNL",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramNL/TelegramNL.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramNL/TelegramNL.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - TelegramSG",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramSG/TelegramSG.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramSG/TelegramSG.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - TelegramUS",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TelegramUS/TelegramUS.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Threads",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Threads/Threads.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Threads/Threads.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - TruthSocial",
+      "policy": "美国手动场景",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TruthSocial/TruthSocial.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TruthSocial/TruthSocial.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Tumblr",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Tumblr/Tumblr.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Twitter",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - VK",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/VK/VK.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/VK/VK.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Whatsapp",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Zalo",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zalo/Zalo.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Zalo/Zalo.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Twitch",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Niconico",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Niconico/Niconico.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Niconico/Niconico.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Dailymotion",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dailymotion/Dailymotion.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Civitai",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Civitai/Civitai.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Civitai/Civitai.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "社交媒体 - Patreon",
+      "policy": "社交媒体",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Patreon/Patreon.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "开发者服务",
+      "policy": "开发者服务",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
+      "mode": "native-snapshot"
+    },
+    {
+      "tag": "Apple服务",
+      "policy": "Apple服务",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "Apple服务 - Domain",
+      "policy": "Apple服务",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/Apple/Apple_Domain.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "LAN",
+      "policy": "DIRECT",
+      "original_url": "https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list",
+      "mode": "native-approved-replacement"
+    },
+    {
+      "tag": "CN REGION",
+      "policy": "DIRECT",
+      "original_url": "https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list",
+      "mode": "native-approved-replacement"
+    },
+    {
+      "tag": "加密货币",
+      "policy": "加密货币",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-cryptocurrency.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-cryptocurrency.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "国际媒体 - category-media",
+      "policy": "国际媒体",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-media.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-media.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "国际媒体 - category-entertainment",
+      "policy": "国际媒体",
+      "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-entertainment.list",
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/category-entertainment.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "海外兜底 - Proxy",
+      "policy": "默认代理",
+      "original_url": "https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list",
+      "converted_source": "https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "海外兜底 - Proxy Domain",
+      "policy": "默认代理",
+      "original_url": "https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy_Domain.list",
+      "converted_source": "https://github.com/blackmatrix7/ios_rule_script/raw/refs/heads/master/rule/Loon/Proxy/Proxy_Domain.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "ChinaMax",
+      "policy": "DIRECT",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list",
+      "mode": "live-original"
+    },
+    {
+      "tag": "ChinaMax - Domain",
+      "policy": "DIRECT",
+      "original_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list",
+      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list",
+      "mode": "live-original"
+    }
+  ],
+  "omitted_rules": [
+    {
+      "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
+      "rule": "PROCESS-NAME,com.zhiliaoapp.musically",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "rule": "PROCESS-NAME,Claude",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "rule": "PROCESS-NAME,Claude.exe",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "rule": "PROCESS-NAME,claude",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "rule": "PROCESS-NAME,claude.exe",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "rule": "PROCESS-NAME,cowork-svc.exe",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
+      "rule": "PROCESS-NAME,com.netflix.mediaclient",
+      "reason": "Egern documented rule types do not include process-name matching"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
+      "rule": "PROCESS-NAME,com.spotify.music",
+      "reason": "Egern documented rule types do not include process-name matching"
+    }
+  ],
+  "normalized_cidrs": [
+    {
+      "source": "Loon local rules",
+      "from": "28.0.0.1/8",
+      "to": "28.0.0.0/8"
+    },
+    {
+      "source": "Loon local rules",
+      "from": "198.18.0.1/16",
+      "to": "198.18.0.0/16"
+    }
+  ],
+  "plugins": [
+    {
+      "name": "Block_HTTPDNS.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "BlockAdvertisers.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "QuickSearch.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/QuickSearch.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Prevent_DNS_Leaks.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Prevent_DNS_Leaks.lpx",
+      "original_enabled": true,
+      "original_policy": "默认代理",
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Node_detection_tool.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Node_detection_tool.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "TestFlightRegionUnlock.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/TestFlightRegionUnlock.lpx",
+      "original_enabled": false,
+      "original_policy": "默认代理",
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "BoxJs.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/BoxJs.lpx",
+      "original_enabled": true,
+      "original_policy": "默认代理",
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Sub-Store.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Sub-Store.lpx",
+      "original_enabled": true,
+      "original_policy": "默认代理",
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Script-Hub.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx",
+      "original_enabled": true,
+      "original_policy": "默认代理",
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "FleaMarket_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "RedPaper_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/RedPaper_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Weibo_intl_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Weibo_intl_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "NeteaseCloudMusic_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/NeteaseCloudMusic_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "SF-Express_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/SF-Express_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "PinDuoDuo_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/PinDuoDuo_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Jin10Data_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Jin10Data_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "AlcidaeVideo_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/AlcidaeVideo_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "FlyerTea_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/FlyerTea_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "DiDi_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/DiDi_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Weixin_external_links_unlock.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Weixin_external_links_unlock.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Taobao_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Taobao_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Amap_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "AppleWeatherEnhancer.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/AppleWeatherEnhancer.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "12306_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/12306_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "JD_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/JD_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Cainiao_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Cainiao_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Spotify_lyrics_translation.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Spotify_lyrics_translation.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    },
+    {
+      "name": "Spotify_remove_ads.lpx",
+      "url": "https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx",
+      "original_enabled": true,
+      "original_policy": null,
+      "status": "not-migrated",
+      "reason": "Original Kelee endpoints returned HTTP 403; source content and Egern script compatibility could not be verified"
+    }
+  ],
+  "unmapped_general_fields": [
+    "sni-sniffing",
+    "dns-reject-mode",
+    "domain-reject-mode",
+    "udp-fallback-mode",
+    "interface-mode",
+    "test-timeout",
+    "resource-parser"
+  ],
+  "unavailable_database_overrides": {
+    "geoip-url": "https://geodata.kelee.one/Country-Masaiki.mmdb",
+    "ipasn-url": "https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb"
+  }
+}
