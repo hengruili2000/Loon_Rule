@@ -18,7 +18,7 @@ for name, group in groups.items():
         refs = data.get('policies', [])
     else:
         refs = [data['default_policy']] + [next(iter(r.values()))['policy'] for r in data['rules']]
-        assert data['rules'] == [{'ssid': {'match': 'PHICOMM_5G', 'policy': 'DIRECT'}}]
+        assert data['rules'] == [{'ssid': {'match': 'ASUS_C8_5G', 'policy': 'DIRECT'}}]
         assert data['default_policy'] == name.replace('场景', '策略')
     assert set(refs) <= known, (name, refs)
     edges[name] = [x for x in refs if x in groups]

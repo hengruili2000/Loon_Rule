@@ -5,6 +5,7 @@
   "source_blob_sha": "a1a224ed582cb5b94ece3a420440f6ef8f533d2f",
   "source_sha256": "50ffcf59a6c4f77e160a1b382c01c4418934789719d363a4d4392fc185403a92",
   "policy_groups": 28,
+  "scene_ssid": "ASUS_C8_5G",
   "rules": 2221,
   "remote_rules": [
     {

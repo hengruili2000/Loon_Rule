@@ -652,7 +652,7 @@ policy_groups:
     name: 香港手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 香港手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -660,7 +660,7 @@ policy_groups:
     name: 台湾手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 台湾手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -668,7 +668,7 @@ policy_groups:
     name: 日本手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 日本手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -676,7 +676,7 @@ policy_groups:
     name: 韩国手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 韩国手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -684,7 +684,7 @@ policy_groups:
     name: 新国手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 新国手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -692,7 +692,7 @@ policy_groups:
     name: 美国手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 美国手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png
@@ -700,7 +700,7 @@ policy_groups:
     name: 全球手动场景
     rules:
     - ssid:
-        match: PHICOMM_5G
+        match: ASUS_C8_5G
         policy: DIRECT
     default_policy: 全球手动策略
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SSID.png

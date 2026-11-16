@@ -65,7 +65,7 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 
 - 原有 27 个策略组保留名称、选项顺序和图标；新增「节点订阅」统一承接订阅和本地节点。
 - 服务分流、TruthSocial/自定义美国规则的美国策略、Apple 服务默认 DIRECT、漏网之鱼默认 DIRECT 均保留。
-- 7 个地区场景在 `PHICOMM_5G` 下使用 DIRECT，其他 Wi-Fi 和蜂窝网络使用对应地区手动策略。此条件仅作用于原场景组，没有将整机流量改成 SSID 直连。
+- 7 个地区场景的 SSID 匹配统一为 `ASUS_C8_5G`：连接该 Wi-Fi 时使用 DIRECT，其他 Wi-Fi 和蜂窝网络使用对应地区手动策略。生成器保存此覆盖设置；初始 Loon 输入快照保持原样。
 - 原绕过列表及策略切换时断开旧连接的设置保留。DNS、端口、路由排除和真实 IP 域名以用户的新设置为准。
 - STUN 通过协议拒绝规则处理。DNS 上游的调度、缓存和失败处理由 Egern 实现，不承诺与 Loon 的内部行为相同。
 - 所有非 FINAL 本地规则在前，远程规则按原顺序放在其后，默认规则在最后。原远程 Apple 两个列表没有扩充，也没有新增单独的 YouTube 分组。

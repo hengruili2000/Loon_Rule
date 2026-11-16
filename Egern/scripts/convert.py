@@ -10,6 +10,7 @@ from urllib.parse import unquote
 import hashlib, ipaddress, json, re, subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+SCENE_SSID = 'ASUS_C8_5G'
 SOURCE = ROOT / 'sources/Loon_custom.lcf'
 raw = SOURCE.read_text()
 sections = {}
@@ -131,7 +132,7 @@ for line in sections['Proxy Group']:
     elif typ == 'ssid':
         options = dict(x.split('=', 1) for x in fields)
         assert options['default'] == options['cellular']
-        data.update(rules=[{'ssid': {'match': k.strip('"'), 'policy': v}} for k, v in options.items() if k not in ('default', 'cellular')], default_policy=options['default'])
+        data.update(rules=[{'ssid': {'match': SCENE_SSID, 'policy': v}} for k, v in options.items() if k not in ('default', 'cellular')], default_policy=options['default'])
         kind = 'conditional'
     else:
         raise ValueError(f'Unsupported group: {line}')
@@ -229,7 +230,7 @@ report = {'date': '2026-11-16', 'timezone': 'Asia/Taipei',
           'source_url': 'https://github.com/hengruili2000/Loon_Rule/blob/main/Loon_custom.lcf',
           'source_blob_sha': 'a1a224ed582cb5b94ece3a420440f6ef8f533d2f',
           'source_sha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-          'policy_groups': len(groups), 'rules': len(rules), 'remote_rules': remote_report,
+          'policy_groups': len(groups), 'scene_ssid': SCENE_SSID, 'rules': len(rules), 'remote_rules': remote_report,
           'omitted_rules': skipped, 'normalized_cidrs': normalized, 'plugins': plugins,
           'unmapped_general_fields': ['sni-sniffing', 'dns-reject-mode', 'domain-reject-mode', 'udp-fallback-mode', 'interface-mode', 'test-timeout', 'resource-parser'],
           'unavailable_database_overrides': {k: general[k] for k in ['geoip-url', 'ipasn-url']},
