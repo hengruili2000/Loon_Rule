@@ -1,0 +1,10 @@
+[
+  {"id":"TikTok","tag":"TikTok","source_url":"https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list"},
+  {"id":"Anthropic","tag":"Anthropic","source_url":"https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list"},
+  {"id":"Speedtest","tag":"Speedtest Intl","source_url":"https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list"},
+  {"id":"Netflix","tag":"Netflix","source_url":"https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list"},
+  {"id":"Spotify","tag":"Spotify","source_url":"https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list"},
+  {"id":"Category-Dev","tag":"开发者服务","source_url":"https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list"},
+  {"id":"LAN","tag":"LAN","source_url":"https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list"},
+  {"id":"China","tag":"CN REGION","source_url":"https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list"}
+]

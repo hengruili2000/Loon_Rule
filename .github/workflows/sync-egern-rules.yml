@@ -1,0 +1,58 @@
+name: Sync Egern remote rule sets
+
+on:
+  schedule:
+    # Daily at 04:23 Asia/Taipei (20:23 UTC), every 24 hours.
+    - cron: '23 20 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-egern-rules.yml'
+      - 'Egern/sources/remote-rules.json'
+      - 'Egern/scripts/rule_converter.py'
+      - 'Egern/scripts/sync_remote_rules.py'
+      - 'Egern/scripts/test_remote_rules.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-egern-rules
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Fetch and convert remote rule sets
+        run: python3 Egern/scripts/sync_remote_rules.py
+
+      - name: Verify converter and rule artifacts
+        run: python3 Egern/scripts/test_remote_rules.py
+
+      - name: Publish converted rule sets
+        shell: bash
+        run: |
+          git add -- Egern/rules
+          if git diff --cached --quiet; then
+            echo 'Upstream rule sets are unchanged.'
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'Sync Egern remote rule sets'
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:refs/heads/main; then
+              exit 0
+            fi
+          done
+          exit 1

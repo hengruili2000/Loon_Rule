@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "sync_interval_seconds": 86400,
+  "sources": [
+    {
+      "id": "TikTok",
+      "tag": "TikTok",
+      "source_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
+      "output": "rules/TikTok.yaml",
+      "source_sha256": "e61af08425f87c1bc81216364c0f8fffbfc0a9924aab89f133151f1ea56de6c2",
+      "output_sha256": "b4e59bb99f482b08534ecf392ae24d251027c6d563077dd0c0026aedb685ba2f",
+      "input_rules": 36,
+      "converted_rules": 35,
+      "omitted_rules": [
+        {
+          "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
+          "rule": "PROCESS-NAME,com.zhiliaoapp.musically",
+          "reason": "Egern has no documented process-name matcher"
+        }
+      ],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    },
+    {
+      "id": "Anthropic",
+      "tag": "Anthropic",
+      "source_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "output": "rules/Anthropic.yaml",
+      "source_sha256": "3908ec440074d7a311633e92c130bc7e481697a3e80abe7ac205800cd98df653",
+      "output_sha256": "af945cecacd66aca6ad5aeca9d597a74d59953c1a736df96f4cedaee054666b4",
+      "input_rules": 44,
+      "converted_rules": 39,
+      "omitted_rules": [
+        {
+          "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+          "rule": "PROCESS-NAME,Claude",
+          "reason": "Egern has no documented process-name matcher"
+        },
+        {
+          "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+          "rule": "PROCESS-NAME,Claude.exe",
+          "reason": "Egern has no documented process-name matcher"
+        },
+        {
+          "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+          "rule": "PROCESS-NAME,claude",
+          "reason": "Egern has no documented process-name matcher"
+        },
+        {
+          "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+          "rule": "PROCESS-NAME,claude.exe",
+          "reason": "Egern has no documented process-name matcher"
+        },
+        {
+          "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+          "rule": "PROCESS-NAME,cowork-svc.exe",
+          "reason": "Egern has no documented process-name matcher"
+        }
+      ],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    },
+    {
+      "id": "Speedtest",
+      "tag": "Speedtest Intl",
+      "source_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list",
+      "output": "rules/Speedtest.yaml",
+      "source_sha256": "d0f9a3b0befdfd209bf752b86e561094f7bb7e81d96e1df86c2ba585535ba755",
+      "output_sha256": "27f947df86bf06d6c1467dfb3a6a4f2298ab00c456a3edace7f8f6f4cccb1c96",
+      "input_rules": 9,
+      "converted_rules": 9,
+      "omitted_rules": [],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    },
+    {
+      "id": "Netflix",
+      "tag": "Netflix",
+      "source_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
+      "output": "rules/Netflix.yaml",
+      "source_sha256": "aa03f015949e8f6f981d90a7d8b1acf7e88472ee48601632bd964b0bb740f8aa",
+      "output_sha256": "4b7d8efae718454286ea95bba4c526d69344486662b45754b9ea5e0c41e52648",
+      "input_rules": 1158,
+      "converted_rules": 1157,
+      "omitted_rules": [
+        {
+          "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
+          "rule": "PROCESS-NAME,com.netflix.mediaclient",
+          "reason": "Egern has no documented process-name matcher"
+        }
+      ],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    },
+    {
+      "id": "Spotify",
+      "tag": "Spotify",
+      "source_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
+      "output": "rules/Spotify.yaml",
+      "source_sha256": "33bd52e8f23cda9374876259621c8fba21554035e20fa55daffbfcaee2109079",
+      "output_sha256": "a8010c50c278bb7cbe28856dc4b107b381bbc3cef94c8aea585e63fae330b508",
+      "input_rules": 31,
+      "converted_rules": 30,
+      "omitted_rules": [
+        {
+          "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
+          "rule": "PROCESS-NAME,com.spotify.music",
+          "reason": "Egern has no documented process-name matcher"
+        }
+      ],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    },
+    {
+      "id": "Category-Dev",
+      "tag": "开发者服务",
+      "source_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
+      "output": "rules/Category-Dev.yaml",
+      "source_sha256": "2a80308d2360e73d26c83c7027f4e0d478fefe725307448bf931cc5f02cd670a",
+      "output_sha256": "57d68ccc0fc70b7ef56be63d42c771b036784fafeff864b4340be850ee8f1829",
+      "input_rules": 700,
+      "converted_rules": 700,
+      "omitted_rules": [],
+      "normalized_cidrs": [],
+      "logical_lowering": [
+        {
+          "source_rule": "AND,((DOMAIN-WILDCARD,?*.dkr.ecr.?*.amazonaws.com),(NOT,((DOMAIN-WILDCARD,?*.dkr.ecr.*.*.amazonaws.com))))",
+          "domain_regex": "(?i)^(?:(?=(?:..*\\.dkr\\.ecr\\...*\\.amazonaws\\.com)$)(?=(?:(?!(?:..*\\.dkr\\.ecr\\..*\\..*\\.amazonaws\\.com)$).*)$).*)$"
+        }
+      ]
+    },
+    {
+      "id": "LAN",
+      "tag": "LAN",
+      "source_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list",
+      "output": "rules/LAN.yaml",
+      "source_sha256": "65decf7849f37cbc66cff8e1155ea1d6344c748c6ead772db2f9e9c7e6a1d546",
+      "output_sha256": "4328c0871527ccdd8fa3ea6fcc00d5bd49929140bc1344d801ad01cefae3e878",
+      "input_rules": 142,
+      "converted_rules": 142,
+      "omitted_rules": [],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    },
+    {
+      "id": "China",
+      "tag": "CN REGION",
+      "source_url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list",
+      "output": "rules/China.yaml",
+      "source_sha256": "15890ccb51dbc91f61aefb4fd4634c8cc030be7f2dc273dfd9e363e6d99e1451",
+      "output_sha256": "49d3b38bfe28e46f48389ecc75c42d75680e894898c6c79eaca3ea4ce127a6a2",
+      "input_rules": 63,
+      "converted_rules": 63,
+      "omitted_rules": [],
+      "normalized_cidrs": [],
+      "logical_lowering": []
+    }
+  ]
+}

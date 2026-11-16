@@ -92,16 +92,25 @@ assert not china_domain_match('rednotecdn.com.example.invalid')
 for rule in p['dns']['forward']:
     assert next(iter(rule.values()))['value'] in set(p['dns']['upstreams']) | {'reject', 'system'}
 assert len(report['remote_rules']) == 53
-assert sum(r['mode'] == 'native-approved-replacement' for r in report['remote_rules']) == 5
-assert sum(r['mode'] == 'native-with-China-exclusions' for r in report['remote_rules']) == 1
-assert len(report['omitted_rules']) == 8 and len(report['plugins']) == 28
+assert sum(r['mode'] == 'converted-remote' for r in report['remote_rules']) == 7
+assert sum(r['mode'] == 'converted-remote-with-China-exclusions' for r in report['remote_rules']) == 1
+sync_report = json.loads((ROOT / 'rules/sync-report.json').read_text())
+assert report['omitted_rules'] == [r for s in sync_report['sources'] for r in s['omitted_rules']]
+assert len(report['plugins']) == 28
+assert len(p['rules']) == 62
+for source in sync_report['sources']:
+    native = read_yaml(ROOT / source['output'])
+    assert all(key == 'no_resolve' or key.endswith('_set') for key in native)
+    assert sum(len(v) for k, v in native.items() if k != 'no_resolve') == source['converted_rules']
 assert p['proxies'] == []
 speed = [r['and'] for r in p['rules'] if 'and' in r and r['and'].get('name') == 'Speedtest Intl']
 assert len(speed) == 1 and speed[0]['policy'] == 'Speedtest Intl'
+assert speed[0]['match'][0]['rule_set']['match'].endswith('/Egern/rules/Speedtest.yaml')
 assert len(speed[0]['match'][1]['not']['match']['or']['match']) == 3
-ecr = [r['and'] for r in p['rules'] if 'and' in r and r['and'].get('name') == '开发者服务']
-assert len(ecr) == 1
-assert ecr[0]['match'][1]['not']['match']['domain_wildcard']['match'] == '?*.dkr.ecr.*.*.amazonaws.com'
+assert any(r.get('rule_set', {}).get('name') == '开发者服务' for r in p['rules'])
+dev = read_yaml(ROOT / 'rules/Category-Dev.yaml')
+assert any(re.fullmatch(regex, '123.dkr.ecr.us-east-1.amazonaws.com') for regex in dev['domain_regex_set'])
+assert not any(re.fullmatch(regex, '123.dkr.ecr.us.east.amazonaws.com') for regex in dev['domain_regex_set'])
 for resource in json.loads((ROOT / 'sources/resources.json').read_text()):
     assert hashlib.sha256((ROOT / resource['path']).read_bytes()).hexdigest() == resource['sha256']
 # Ruby's regex engine accepts the source's scoped inline case-insensitive flags.

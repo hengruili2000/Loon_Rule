@@ -1,0 +1,51 @@
+# Generated Egern rule set: Anthropic
+# Source: https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list
+# Managed by the daily GitHub Actions workflow; do not edit.
+# Generated from jinxinkai/clash-ai-rules/Anthropic.yaml (master branch)
+# Upstream license: MIT (https://github.com/jinxinkai/clash-ai-rules/blob/master/README.md#license)
+no_resolve: true
+domain_suffix_set:
+  - "anthropic.com"
+  - "anthropic.com.cn"
+  - "anthropic.team"
+  - "ant.dev"
+  - "antspace.dev"
+  - "chatbotclaude.com"
+  - "claude.ai"
+  - "claude.app"
+  - "claude.com"
+  - "claude.dev"
+  - "claude.new"
+  - "claude.site"
+  - "clau.de"
+  - "claudeacademy.com"
+  - "claudemcpclient.com"
+  - "claudemcpcontent.com"
+  - "claudepages.dev"
+  - "claudestudio.com"
+  - "claudeusercontent.com"
+  - "modelcontextprotocol.com"
+  - "modelcontextprotocol.io"
+  - "modelcontextprotocol.net"
+  - "modelcontextprotocol.org"
+  - "sentry.io"
+  - "statsigapi.net"
+  - "intercom.io"
+  - "intercomcdn.com"
+domain_set:
+  - "servd-anthropic-website.b-cdn.net"
+  - "anthropic.com.cdn.cloudflare.net"
+  - "anthropic.auth0.com"
+  - "anthropic-com.ghost.io"
+  - "cdn.growthbook.io"
+  - "browser-intake-us5-datadoghq.com"
+  - "cdn.usefathom.com"
+domain_keyword_set:
+  - "datadog"
+  - "sift"
+ip_cidr_set:
+  - "160.79.104.0/21"
+ip_cidr6_set:
+  - "2607:6bc0::/32"
+asn_set:
+  - "399358"

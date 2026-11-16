@@ -6,7 +6,7 @@
   "source_sha256": "50ffcf59a6c4f77e160a1b382c01c4418934789719d363a4d4392fc185403a92",
   "policy_groups": 28,
   "scene_ssid": "ASUS_C8_5G",
-  "rules": 2221,
+  "rules": 62,
   "remote_rules": [
     {
       "tag": "Custom US Proxy",
@@ -19,15 +19,19 @@
       "tag": "TikTok",
       "policy": "TikTok",
       "original_url": "https://kelee.one/Tool/Loon/Lsr/TikTok.lsr",
-      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
-      "mode": "native-approved-replacement"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/TikTok.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "Anthropic",
       "policy": "AI",
       "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
-      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
-      "mode": "native-snapshot"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Anthropic.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "AI",
@@ -40,15 +44,19 @@
       "tag": "Speedtest Intl",
       "policy": "Speedtest Intl",
       "original_url": "https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr",
-      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list",
-      "mode": "native-with-China-exclusions"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Speedtest.yaml",
+      "mode": "converted-remote-with-China-exclusions",
+      "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "Netflix",
       "policy": "Netflix",
       "original_url": "https://rule.kelee.one/Loon/Netflix.lsr",
-      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
-      "mode": "native-approved-replacement"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Netflix.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "Apple TV",
@@ -61,8 +69,10 @@
       "tag": "Spotify",
       "policy": "Spotify",
       "original_url": "https://rule.kelee.one/Loon/Spotify.lsr",
-      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
-      "mode": "native-approved-replacement"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Spotify.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "社交媒体 - 4chan",
@@ -299,8 +309,10 @@
       "tag": "开发者服务",
       "policy": "开发者服务",
       "original_url": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
-      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
-      "mode": "native-snapshot"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Category-Dev.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Category-Dev.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "Apple服务",
@@ -320,15 +332,19 @@
       "tag": "LAN",
       "policy": "DIRECT",
       "original_url": "https://kelee.one/Tool/Loon/Lsr/LAN_SPLITTER.lsr",
-      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list",
-      "mode": "native-approved-replacement"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/LAN.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "CN REGION",
       "policy": "DIRECT",
       "original_url": "https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr",
-      "converted_source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list",
-      "mode": "native-approved-replacement"
+      "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/China.yaml",
+      "mode": "converted-remote",
+      "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list",
+      "sync_interval_seconds": 86400
     },
     {
       "tag": "加密货币",
@@ -384,42 +400,42 @@
     {
       "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list",
       "rule": "PROCESS-NAME,com.zhiliaoapp.musically",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
       "rule": "PROCESS-NAME,Claude",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
       "rule": "PROCESS-NAME,Claude.exe",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
       "rule": "PROCESS-NAME,claude",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
       "rule": "PROCESS-NAME,claude.exe",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/rule/Anthropic.list",
       "rule": "PROCESS-NAME,cowork-svc.exe",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list",
       "rule": "PROCESS-NAME,com.netflix.mediaclient",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     },
     {
       "source": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list",
       "rule": "PROCESS-NAME,com.spotify.music",
-      "reason": "Egern documented rule types do not include process-name matching"
+      "reason": "Egern has no documented process-name matcher"
     }
   ],
   "normalized_cidrs": [
@@ -800,5 +816,7 @@
       "enabled": true
     }
   ],
-  "user_modules_source_sha256": "bc428978d06bbbfeb71cf29005347c2cf05d2a839bfd89de8deb91e70a659280"
+  "user_modules_source_sha256": "bc428978d06bbbfeb71cf29005347c2cf05d2a839bfd89de8deb91e70a659280",
+  "remote_conversion_workflow": ".github/workflows/sync-egern-rules.yml",
+  "remote_conversion_interval_seconds": 86400
 }

@@ -1,6 +1,6 @@
 # Egern 配置迁移
 
-本目录将仓库根目录的 `Loon_custom.lcf` 转为 Egern YAML。转换日期：2026-11-16（Asia/Taipei）。通用设置、DNS 和真实 IP 域名已按用户后续提供的文本完整覆盖，并启用用户指定的 14 个模块。原 Loon 插件的逐项等价迁移状态仍记录在 `plugin-status.md`。
+本目录将仓库根目录的 `Loon_custom.lcf` 转为 Egern YAML。转换日期：2026-11-16（Asia/Taipei）。通用设置、DNS 和真实 IP 域名已按用户后续提供的文本完整覆盖，并启用用户指定的 14 个模块。不兼容的远程规则由 GitHub Actions 每 24 小时转换成独立远程产物，主配置不再内嵌这些上游规则。原 Loon 插件的逐项等价迁移状态仍记录在 `plugin-status.md`。
 
 ## 导入
 
@@ -76,21 +76,31 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 
 | 原标签 | 替代服务 | 转换方式 |
 | --- | --- | --- |
-| TikTok | TikTok | 内嵌 Egern 规则 |
-| Netflix | Netflix | 内嵌 Egern 规则 |
-| Spotify | Spotify | 内嵌 Egern 规则 |
-| LAN | Lan | 内嵌 Egern 规则 |
-| CN REGION | China | 内嵌 Egern 规则，保留原位置 |
-| Speedtest Intl | Speedtest | 逻辑条件：命中 Speedtest 且不命中 China、ChinaMax、ChinaMax_Domain |
+| TikTok | TikTok | 远程 `rules/TikTok.yaml` |
+| Netflix | Netflix | 远程 `rules/Netflix.yaml` |
+| Spotify | Spotify | 远程 `rules/Spotify.yaml` |
+| LAN | Lan | 远程 `rules/LAN.yaml` |
+| CN REGION | China | 远程 `rules/China.yaml`，保留原位置 |
+| Speedtest Intl | Speedtest | 远程 `rules/Speedtest.yaml`，主配置保留 NOT China/ChinaMax/ChinaMax_Domain 条件 |
 
 Speedtest 的国内排除只约束该服务规则，不提升整份配置中 China 规则的优先级。排除基于这三个列表当时能匹配的域名、UA 和已知 IP，并不代表能识别所有国内测速服务器。未收录的服务器仍可能命中 Speedtest 关键词规则。
 
-45 个原规则资源继续通过原 URL 加载，每 8 小时更新。Anthropic、Category-Dev 以及批准替换的 6 项使用下载快照生成本地 YAML 条目；这些内嵌条目需要重新运行转换脚本才会更新，本次未设置自动更新任务。Speedtest 的 China 排除列表仍远程更新。
+45 个原规则资源继续通过原 URL 加载，每 8 小时更新。Anthropic、Category-Dev 和上述 6 项共 8 份资源改由每日工作流转换并发布，主配置只保留远程 URL。Speedtest 的服务匹配数据也在远程产物中，配置中仅保留组合匹配关系。
+
+## 远程规则每天自动转换
+
+- 工作流：[sync-egern-rules.yml](../.github/workflows/sync-egern-rules.yml)。每天台北时间 **04:23**（UTC 20:23）执行一次，同时支持手动运行及转换代码/源清单变更后的自动运行。
+- 上游和产物映射：`sources/remote-rules.json`。产物为 `rules/Anthropic.yaml`、`rules/Category-Dev.yaml`、`rules/TikTok.yaml`、`rules/Netflix.yaml`、`rules/Spotify.yaml`、`rules/LAN.yaml`、`rules/China.yaml`、`rules/Speedtest.yaml`。
+- 主配置使用 `https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/<名称>.yaml` 引用这些产物，客户端每 86400 秒拉取一次。服务策略、53 项远程规则的相对顺序及 DNS 配置保持不变。
+- 转换先下载并验证全部 8 个上游，再更新产物。遇到下载失败、未知语法、无法等价转换的逻辑或混合 no-resolve 语义时，工作流失败，不发布新产物，保留仓库中最后一次有效版本。上游没有变化时不创建无意义提交。
+- `rules/sync-report.json` 记录每项上游 URL、内容哈希、转换条目数、排除项和逻辑转换信息。该报告随每日工作流更新；`conversion-report.json` 是生成主配置时的记录。
+- 原上游的署名及许可注释保留在转换产物中。仍不支持的 PROCESS-NAME 条目明确记录在同步报告里，不伪造等价规则。
+- 复杂的域名 AND/OR/NOT 表达式由通用转换器解析并生成等价的锚定域名正则，不把特定上游的规则内容硬编码在主配置或脚本中。AWS ECR 的正反条件已做匹配回归测试。
 
 ## 兼容差异及未迁移项目
 
-- Category-Dev 的 AWS ECR `AND/NOT/DOMAIN-WILDCARD` 条件已显式转换，避免旧转换器静默丢弃该条件。
-- 8 条 PROCESS-NAME 规则没有迁移：Anthropic 中 5 条，替代的 TikTok、Netflix、Spotify 中各 1 条。Egern 当前文档的规则类型不包含进程匹配；相应服务的域名/IP 规则仍保留。具体条目见 `conversion-report.json`。
+- Category-Dev 的 AWS ECR `AND/NOT/DOMAIN-WILDCARD` 条件由每日转换器转为等价域名正则，保存在独立远程产物中。
+- 当前 8 条 PROCESS-NAME 规则没有迁移：Anthropic 中 5 条，替代的 TikTok、Netflix、Spotify 中各 1 条。Egern 当前文档的规则类型不包含进程匹配；相应服务的域名/IP 规则仍保留。最新条目见 `rules/sync-report.json`。
 - 初始 28 个可莉 Loon 插件没有根据其原文自动转换：原资源在初次迁移环境返回 403。后续用户指定的 14 个模块已单独启用，其中部分功能与原插件重叠，但未证明逐项等价。历史清单、原启用状态及绑定策略见 `plugin-status.md` 和报告。
 - 原可莉 GeoIP/ASN 下载返回 403；现按用户指定覆盖为 Loyalsoldier GeoIP，ASN 未设置自定义下载地址。数据库内容可能与原 Loon 版本不同。
 - `sni-sniffing`、`dns-reject-mode`、`domain-reject-mode`、`udp-fallback-mode`、`interface-mode`、全局 `test-timeout` 和 `resource-parser` 未找到直接对应的已文档化配置项，因此未伪造等价字段。STUN 拒绝规则也不能代替 Loon 对所有 UDP 失败连接的 REJECT 回退语义。
@@ -103,13 +113,17 @@ Speedtest 的国内排除只约束该服务规则，不提升整份配置中 Chi
 
 ```sh
 python3 Egern/scripts/fetch_sources.py
+python3 Egern/scripts/sync_remote_rules.py
 python3 Egern/scripts/convert.py
+python3 Egern/scripts/test_remote_rules.py
 python3 Egern/scripts/validate.py
 ```
 
 `sources/Loon_custom.lcf` 是初始 Loon 输入，原 Git blob 为 `a1a224ed582cb5b94ece3a420440f6ef8f533d2f`。更新 Loon 输入时也需更新脚本中的来源版本及相应验证。后续通用设置和模块分别以 `sources/user-settings.yaml`、`sources/user-modules.yaml` 为准，重新生成时不会丢失。`sources/resources.json` 记录初始规则下载地址和 SHA-256，下载缓存 `sources/resources/` 不进入 Git。
 
-已通过 YAML 解析、策略引用与循环检查、53 项原远程规则迁移计数、SSID 场景、默认规则位置、过滤表达式、CIDR 规范化和逻辑条件结构检查；16 个顶层设置与当前设置源一致，66 条 DNS 规则及 14 项模块匹配。新增校验覆盖两份 DNS 源与 DIRECT 源一致、补全规则优先级、两个反馈域名匹配及域名后缀边界。原服务分组、分流规则与默认策略保持不变。初次迁移时另使用 Egern 官方网站的 WebAssembly 转换器检查了 45 个保留远程分流源，见 `official-converter-check.json`。这不是 Egern 完整配置 schema 验证，也没有在实际 Egern 客户端进行导入、连接或脚本功能测试。
+日常同步不需要重新生成主配置：工作流只执行 `sync_remote_rules.py` 和 `test_remote_rules.py`，更新 `Egern/rules/`。只有策略/配置结构发生变化时才需要运行主配置生成器。
+
+已通过 YAML 解析、策略引用与循环检查、53 项原远程规则迁移计数、SSID 场景、默认规则位置、过滤表达式、CIDR 规范化和逻辑条件结构检查；主配置现在为 62 条规则，16 个顶层设置与当前设置源一致，66 条 DNS 规则及 14 项模块匹配。校验覆盖两份 DNS 源与 DIRECT 源一致、补全规则优先级、两个反馈域名匹配及域名后缀边界。另有转换器回归检查，验证逻辑规则等价性、条目计数、产物哈希及失败时不覆盖旧产物。初次迁移时使用 Egern 官方网站的 WebAssembly 转换器检查了 45 个保留远程分流源，见 `official-converter-check.json`。这些检查不等于 Egern 完整 schema 验证，未进行实际客户端导入、连接或脚本功能测试。
 
 原规则资源仍可能受未来更新、网络访问和客户端版本影响；导入后应检查规则下载状态和实际命中日志。
 

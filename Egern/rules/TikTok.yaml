@@ -1,0 +1,52 @@
+# Generated Egern rule set: TikTok
+# Source: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list
+# Managed by the daily GitHub Actions workflow; do not edit.
+# NAME: TikTok
+# AUTHOR: blackmatrix7
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+# UPDATED: 2026-10-16 04:51:01
+# DOMAIN: 4
+# DOMAIN-KEYWORD: 2
+# DOMAIN-SUFFIX: 28
+# PROCESS-NAME: 1
+# USER-AGENT: 1
+# TOTAL: 36
+domain_set:
+  - "lf16-effectcdn.byteeffecttos-g.com"
+  - "lf16-pkgcdn.pitaya-clientai.com"
+  - "p16-tiktokcdn-com.akamaized.net"
+  - "trae-api-sg.mchost.guru"
+domain_suffix_set:
+  - "bytedapm.com"
+  - "bytegecko-i18n.com"
+  - "byteintlapi.com"
+  - "byteoversea.com"
+  - "capcut.com"
+  - "capcutapi.com"
+  - "capcutapi.us"
+  - "capcutstatic.com"
+  - "ibytedtos.com"
+  - "ibyteimg.com"
+  - "ipstatp.com"
+  - "isnssdk.com"
+  - "marscode.com"
+  - "muscdn.com"
+  - "musical.ly"
+  - "sgpstatp.com"
+  - "snssdk.com"
+  - "tik-tokapi.com"
+  - "tiktok.com"
+  - "tiktokcdn-us.com"
+  - "tiktokcdn.com"
+  - "tiktokd.net"
+  - "tiktokd.org"
+  - "tiktokmusic.app"
+  - "tiktokv.com"
+  - "tiktokv.us"
+  - "trae.ai"
+  - "ttwebview.com"
+domain_keyword_set:
+  - "musical.ly"
+  - "tiktok"
+user_agent_set:
+  - "TikTok*"
