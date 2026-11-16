@@ -16,6 +16,10 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 4. 使用支持 `conditional` 和 `flatten` 的当前 Egern 版本。若订阅无法解析，需要让订阅源输出 Egern 支持的节点格式。已启用 Sub-Store 模块，但仍需自行配置订阅或合集地址；仅安装模块不会自动向「节点订阅」填入节点。
 5. HTTPS 重写/去广告模块需要在 Egern 中生成、安装并信任证书。模块链接可下载不代表对应 App 的脚本功能已通过测试。
 
+## Action Button 切换 Egern VPN
+
+已提供签名的 [Egern VPN 开关快捷指令](shortcuts/Egern-VPN-Toggle.shortcut)。导入后选择目标 iPhone 上的 Egern VPN，再将它绑定到「设置 → 操作按钮 → 快捷指令」。指令使用系统「设置 VPN → 切换」动作，完整说明见 [shortcuts/README.md](shortcuts/README.md)。尚未在 iPhone 上实测。
+
 ## 用户提供的通用设置与 DNS
 
 `sources/user-settings.yaml` 保存用户提供的设置及后续授权的 ChinaMax DNS 补全。生成配置时直接保留该段的内容与注释。
