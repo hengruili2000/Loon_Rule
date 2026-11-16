@@ -267,7 +267,17 @@ dns:
       match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/Google.yaml
       value: Google
       update_interval: 604800
-  # ⑨ 兜底：.cn 走国内，其余全部走 Default（境外）
+  # ⑨ 国内 DNS 补全：复用流量分流的两份 ChinaMax 规则源
+  # 放在原有服务/Google DNS 规则之后，覆盖遗漏的国内 .com 和 CDN 域名
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list
+      value: DNSPod
+      update_interval: 28800
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list
+      value: DNSPod
+      update_interval: 28800
+  # ⑩ 兜底：.cn 走国内，其余全部走 Default（境外）
   - domain_suffix:
       match: cn
       value: DNSPod

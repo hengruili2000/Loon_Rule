@@ -18,15 +18,25 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 
 ## 用户提供的通用设置与 DNS
 
-`sources/user-settings.yaml` 保存用户提供的原始文本。生成配置时直接保留该段的内容与注释，不重排 DNS 规则、不修改域名和 URL。
+`sources/user-settings.yaml` 保存用户提供的设置及后续授权的 ChinaMax DNS 补全。生成配置时直接保留该段的内容与注释。
 
 - HTTP/SOCKS 端口为 3080/3090，`vif_only: true`、`block_quic: true`、`hijack_dns: ['*:53']`，保留用户指定的路由排除列表和 10.7.0.1 回环地址。
 - GeoIP 覆盖为用户指定的 Loyalsoldier Country.mmdb。
-- DNS 整节替换为用户的 6 组上游、64 条顺序规则、阻断 IP 列表和其他 DNS 参数。原 Loon 的 Host 映射与 `PHICOMM_5G` DNS 转发不再合入；策略组中的 SSID 直连条件仍保留。
+- DNS 使用用户的 6 组上游、阻断 IP 列表及其他参数；后续增加 2 条 ChinaMax DNS 补全规则，现共 66 条。原 Loon 的 Host 映射与 `PHICOMM_5G` DNS 转发不再合入；策略组中的 SSID 直连条件仍保留。
 - `real_ip_domains` 完整替换为用户提供的 34 项。
 - 用户明确选择保留 `proxy_nameservers: [ProxyDNS]` 和 Clash `reject.txt` 链接，因此没有将组名展开为服务器地址，也没有转换广告规则格式。这两处与当前官方 DNS 文档列举的写法/资源格式存在差异，未验证客户端能否按预期处理。[官方 DNS 文档](https://egernapp.com/docs/configuration/dns/)
 - `vif_hairpin_addresses` 和用户给出的其他原值均保留；本次 YAML 校验不等于 Egern 完整 schema 校验。
 - 原文中关于 DNS 强制走代理、代理服务器域名解析及 AdBlock.yaml 的说明也按要求保留。Egern 官方文档描述的上游连接路径取决于 DNS 类型及路由规则，配置中的注释不会单独建立代理路由；也没有因注释自动新增 AdBlock.yaml 分流规则。
+
+### 国内域名落入境外 DNS 的修正
+
+用户反馈 `static.mokahr.com` 和 `sns-v14.rednotecdn.com` 在 Egern 开启后解析到偏海外的地址。两者分别命中 ChinaMax 的 `.mokahr.com` 和 `.rednotecdn.com`，流量走 DIRECT；此前的 DNS 国内名单却没有覆盖它们，因而落入 Google/Cloudflare 的 Default 上游。
+
+本次直接复用现有流量分流的 `ChinaMax.list`、`ChinaMax_Domain.list` 两个远程源，通过 DNS `proxy_rule_set` 指向 DNSPod。客户端每 28800 秒（8 小时）更新，与流量规则使用同源数据，无需单独维护国内域名快照。混合规则源中的域名条件用于 DNS 匹配；这不意味着 IP/ASN/UA 条件能将未知域名判定为国内域名。
+
+两条规则放在现有明确服务分流、本地保留域名处理和 Google DNS 规则之后，在 `.cn` 和 `* → Default` 之前。已有 64 条规则的相对顺序未改，保留先命中的服务例外；这次没有把所有 DIRECT 服务一概改用国内 DNS。
+
+更新客户端配置后，确认两份 ChinaMax DNS 规则下载成功，再清理 DNS 缓存并重连 Egern。对反馈的两个域名，预期 DNS 日志命中新增 ChinaMax DNS 规则、上游为 DNSPod。实际 CDN 地址和地域仍由 DNS 服务与站点决定，本次未进行设备实测。
 
 ## 用户指定的 14 个模块
 
@@ -99,7 +109,7 @@ python3 Egern/scripts/validate.py
 
 `sources/Loon_custom.lcf` 是初始 Loon 输入，原 Git blob 为 `a1a224ed582cb5b94ece3a420440f6ef8f533d2f`。更新 Loon 输入时也需更新脚本中的来源版本及相应验证。后续通用设置和模块分别以 `sources/user-settings.yaml`、`sources/user-modules.yaml` 为准，重新生成时不会丢失。`sources/resources.json` 记录初始规则下载地址和 SHA-256，下载缓存 `sources/resources/` 不进入 Git。
 
-已通过 YAML 解析、策略引用与循环检查、53 项原远程规则迁移计数、SSID 场景、默认规则位置、过滤表达式、CIDR 规范化和逻辑条件结构检查；用户提供的 16 个顶层设置逐项完全相等，64 条 DNS 规则顺序及 14 项模块也完全匹配。原服务分组、分流规则与默认策略保持不变。初次迁移时另使用 Egern 官方网站的 WebAssembly 转换器检查了 45 个保留远程分流源，见 `official-converter-check.json`；该检查不涵盖本次新增 DNS 链接和模块。这不是 Egern 完整配置 schema 验证，也没有在实际 Egern 客户端进行导入、连接或脚本功能测试。
+已通过 YAML 解析、策略引用与循环检查、53 项原远程规则迁移计数、SSID 场景、默认规则位置、过滤表达式、CIDR 规范化和逻辑条件结构检查；16 个顶层设置与当前设置源一致，66 条 DNS 规则及 14 项模块匹配。新增校验覆盖两份 DNS 源与 DIRECT 源一致、补全规则优先级、两个反馈域名匹配及域名后缀边界。原服务分组、分流规则与默认策略保持不变。初次迁移时另使用 Egern 官方网站的 WebAssembly 转换器检查了 45 个保留远程分流源，见 `official-converter-check.json`。这不是 Egern 完整配置 schema 验证，也没有在实际 Egern 客户端进行导入、连接或脚本功能测试。
 
 原规则资源仍可能受未来更新、网络访问和客户端版本影响；导入后应检查规则下载状态和实际命中日志。
 

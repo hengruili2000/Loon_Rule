@@ -65,7 +65,30 @@ assert len(p['modules']) == 14 and all(m['enabled'] for m in p['modules'])
 assert p['dns']['proxy_nameservers'] == ['ProxyDNS']
 assert p['dns']['forward'][0]['proxy_rule_set']['match'] == 'https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt'
 assert p['dns']['forward'][-1] == {'domain_wildcard': {'match': '*', 'value': 'Default'}}
-assert len(p['dns']['forward']) == 64
+assert len(p['dns']['forward']) == 66
+china_urls = [next(iter(r.values()))['match'] for r in p['rules']
+              if next(iter(r.values())).get('name') in {'ChinaMax', 'ChinaMax - Domain'}]
+assert len(china_urls) == 2
+assert p['dns']['forward'][-4:-2] == [
+    {'proxy_rule_set': {'match': url, 'value': 'DNSPod', 'update_interval': 28800}}
+    for url in china_urls]
+# Existing explicit services and Google rules precede the domestic fallback.
+assert all(next(iter(r.values())).get('value') != 'Google'
+           for r in p['dns']['forward'][-4:])
+assert p['dns']['forward'][-2] == {'domain_suffix': {'match': 'cn', 'value': 'DNSPod'}}
+china_domain_resource = next(r for r in json.loads((ROOT / 'sources/resources.json').read_text())
+                             if r['url'] == china_urls[1])
+domain_lines = [s.strip() for s in (ROOT / china_domain_resource['path']).read_text().splitlines()
+                if s.strip() and not s.startswith('#')]
+exact = {s for s in domain_lines if not s.startswith('.')}
+suffixes = {s[1:] for s in domain_lines if s.startswith('.')}
+def china_domain_match(domain):
+    labels = domain.split('.')
+    return domain in exact or any('.'.join(labels[i:]) in suffixes for i in range(len(labels)))
+assert china_domain_match('static.mokahr.com')
+assert china_domain_match('sns-v14.rednotecdn.com')
+assert not china_domain_match('notmokahr.com')
+assert not china_domain_match('rednotecdn.com.example.invalid')
 for rule in p['dns']['forward']:
     assert next(iter(rule.values()))['value'] in set(p['dns']['upstreams']) | {'reject', 'system'}
 assert len(report['remote_rules']) == 53

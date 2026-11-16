@@ -211,7 +211,8 @@ json_text = json.dumps(remainder, ensure_ascii=False)
 yaml = subprocess.run(['ruby', '-rjson', '-ryaml', '-e', 'STDOUT.write(YAML.dump(JSON.parse(STDIN.read)))'], input=json_text, text=True, capture_output=True, check=True).stdout
 header = '''# Loon_custom.lcf → Egern；转换日期 2026-11-16（Asia/Taipei）。
 # 导入后先向「节点订阅」添加订阅并选择地区节点；原文件不含任何订阅。
-# 通用设置、DNS、real_ip_domains 按用户提供内容原样覆盖，另启用指定的 14 个模块。
+# 通用设置使用用户提供内容，DNS 已按后续要求增加 ChinaMax 国内域名补全。
+# 启用指定的 14 个模块；保留原有 DNS 服务规则及其优先级。
 # 保留用户指定的 ProxyDNS 组名写法及 Clash reject.txt 链接，未作兼容改写。
 # 尚未经过 Egern 客户端实测；完整差异和已知待验证项见 README.md。
 # 远程 .list 保留原来源并每 8 小时更新；内嵌规则需重新运行转换脚本更新。
@@ -238,6 +239,12 @@ report = {'date': '2026-11-16', 'timezone': 'Asia/Taipei',
               'top_level_keys': list(user_settings),
               'dns_replacement': 'whole-section; original Loon hosts and SSID DNS forwarding removed',
               'compatibility_policy': 'User explicitly requested exact values; do not expand ProxyDNS or convert reject.txt',
+              'dns_chinamax_coverage': {
+                  'sources': [china_original, china_domain],
+                  'upstream': 'DNSPod',
+                  'update_interval': 28800,
+                  'position': 'after existing Google/service rules, before cn and wildcard fallback',
+                  'regression_domains': ['static.mokahr.com', 'sns-v14.rednotecdn.com']},
               'geoip_db_url': user_settings['geoip_db_url']},
           'user_modules': user_modules,
           'user_modules_source_sha256': hashlib.sha256(modules_path.read_bytes()).hexdigest()}

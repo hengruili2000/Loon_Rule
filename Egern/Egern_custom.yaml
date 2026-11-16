@@ -1,6 +1,7 @@
 # Loon_custom.lcf → Egern；转换日期 2026-11-16（Asia/Taipei）。
 # 导入后先向「节点订阅」添加订阅并选择地区节点；原文件不含任何订阅。
-# 通用设置、DNS、real_ip_domains 按用户提供内容原样覆盖，另启用指定的 14 个模块。
+# 通用设置使用用户提供内容，DNS 已按后续要求增加 ChinaMax 国内域名补全。
+# 启用指定的 14 个模块；保留原有 DNS 服务规则及其优先级。
 # 保留用户指定的 ProxyDNS 组名写法及 Clash reject.txt 链接，未作兼容改写。
 # 尚未经过 Egern 客户端实测；完整差异和已知待验证项见 README.md。
 # 远程 .list 保留原来源并每 8 小时更新；内嵌规则需重新运行转换脚本更新。
@@ -273,7 +274,17 @@ dns:
       match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/Google.yaml
       value: Google
       update_interval: 604800
-  # ⑨ 兜底：.cn 走国内，其余全部走 Default（境外）
+  # ⑨ 国内 DNS 补全：复用流量分流的两份 ChinaMax 规则源
+  # 放在原有服务/Google DNS 规则之后，覆盖遗漏的国内 .com 和 CDN 域名
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list
+      value: DNSPod
+      update_interval: 28800
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list
+      value: DNSPod
+      update_interval: 28800
+  # ⑩ 兜底：.cn 走国内，其余全部走 Default（境外）
   - domain_suffix:
       match: cn
       value: DNSPod
