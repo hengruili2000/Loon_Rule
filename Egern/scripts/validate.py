@@ -99,8 +99,7 @@ assert not china_domain_match('rednotecdn.com.example.invalid')
 for rule in p['dns']['forward']:
     assert next(iter(rule.values()))['value'] in set(p['dns']['upstreams']) | {'reject', 'system'}
 assert len(report['remote_rules']) == 53
-assert sum(r['mode'] == 'converted-remote' for r in report['remote_rules']) == 7
-assert sum(r['mode'] == 'converted-remote-with-China-exclusions' for r in report['remote_rules']) == 1
+assert sum(r['mode'] == 'converted-remote' for r in report['remote_rules']) == 8
 sync_report = json.loads((ROOT / 'rules/sync-report.json').read_text())
 assert len(report['plugins']) == 28
 assert len(p['rules']) == report['rules'] == 61 + len(transport)
@@ -111,10 +110,13 @@ for source in sync_report['sources']:
     assert all(key == 'no_resolve' or key.endswith('_set') for key in native)
     assert sum(len(v) for k, v in native.items() if k != 'no_resolve') == source['converted_rules']
 assert p['proxies'] == []
-speed = [r['and'] for r in p['rules'] if 'and' in r and r['and'].get('name') == 'Speedtest Intl']
+speed = [r['rule_set'] for r in p['rules'] if 'rule_set' in r
+         and r['rule_set'].get('name') == 'Speedtest Intl']
 assert len(speed) == 1 and speed[0]['policy'] == 'Speedtest Intl'
-assert speed[0]['match'][0]['rule_set']['match'].endswith('/Egern/rules/Speedtest.yaml')
-assert len(speed[0]['match'][1]['not']['match']['or']['match']) == 3
+speed_url = speed[0]['match']
+assert speed_url.endswith('/Egern/rules/Speedtest.yaml')
+assert by_match[speed_url][1] == 'RemoteDNS'
+assert all(by_match[speed_url][0] < by_match[url][0] for url in china_urls)
 assert any(r.get('rule_set', {}).get('name') == '开发者服务' for r in p['rules'])
 dev = read_yaml(ROOT / 'rules/Category-Dev.yaml')
 assert any(re.fullmatch(regex, '123.dkr.ecr.us-east-1.amazonaws.com') for regex in dev['domain_regex_set'])

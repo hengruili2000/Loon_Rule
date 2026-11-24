@@ -135,25 +135,13 @@ for line in sections['Rule']:
         entry['no_resolve'] = True
     rules.append(with_policy(local_rule, fields[2]))
 
-china_original = next(x['url'] for x in resources if x['role'] == 'original' and x['url'].endswith('/ChinaMax/ChinaMax.list'))
-china_domain = next(x['url'] for x in resources if x['role'] == 'original' and x['url'].endswith('/ChinaMax/ChinaMax_Domain.list'))
-
 for line in sections['Remote Rule']:
     fields = split_csv(line)
     url = fields[0]; options = dict(x.split('=', 1) for x in fields[1:])
     policy, tag = options['policy'], options['tag']
     if options.get('enabled', 'true') == 'false':
         continue
-    if tag == 'Speedtest Intl':
-        # Keep exclusions local to Speedtest; do not reorder the global China rules.
-        china_conditions = [{'rule_set': {'match': x, 'update_interval': 86400}} for x in [REMOTE_BASE + 'China.yaml', china_original, china_domain]]
-        c = {'and': {'match': [
-            {'rule_set': {'match': REMOTE_BASE + 'Speedtest.yaml', 'update_interval': 86400}},
-            {'not': {'match': {'or': {'match': china_conditions}}}}
-        ]}}
-        rules.append(with_policy(c, policy, tag))
-        mode, resolved = 'converted-remote-with-China-exclusions', REMOTE_BASE + 'Speedtest.yaml'
-    elif tag in remote_specs:
+    if tag in remote_specs:
         resolved = REMOTE_BASE + remote_specs[tag]['id'] + '.yaml'
         rules.append({'rule_set': {'match': resolved, 'policy': policy, 'name': tag, 'update_interval': 86400}})
         mode = 'converted-remote'

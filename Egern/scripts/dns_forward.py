@@ -30,24 +30,16 @@ def dns_forward(dns, rules, groups):
         return {'DIRECT': 'DNSPod', 'REJECT': 'reject'}.get(policy, 'RemoteDNS')
 
     forward = list(dns['forward'])
-    speedtest = None
     for rule in rules:
         kind, entry = next(iter(rule.items()))
         upstream = upstream_for(entry['policy'])
         if kind == 'default':
             fallback = {'domain_wildcard': {'match': '*', 'value': upstream}}
-        elif kind == 'and' and entry.get('name') == 'Speedtest Intl':
-            source = entry['match'][0]['rule_set']
-            speedtest = {'proxy_rule_set': {**source, 'value': upstream}}
         elif kind == 'rule_set':
             forward.append({'proxy_rule_set': {
                 'match': entry['match'], 'update_interval': entry['update_interval'], 'value': upstream}})
         elif kind in {'domain', 'domain_suffix', 'domain_keyword', 'domain_regex', 'domain_wildcard'}:
             forward.append({kind: {'match': entry['match'], 'value': upstream}})
-    # DNS cannot express Speedtest's compound exclusion. Let the projected
-    # China rules match first, then use Speedtest for otherwise unmatched names.
-    if speedtest:
-        forward.append(speedtest)
     return [*forward, fallback]
 
 

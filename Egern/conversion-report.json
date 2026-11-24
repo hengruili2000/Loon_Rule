@@ -45,7 +45,7 @@
       "policy": "Speedtest Intl",
       "original_url": "https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr",
       "converted_source": "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Speedtest.yaml",
-      "mode": "converted-remote-with-China-exclusions",
+      "mode": "converted-remote",
       "conversion_upstream": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list",
       "sync_interval_seconds": 86400
     },

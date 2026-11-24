@@ -116,6 +116,10 @@ dns:
       update_interval: 28800
       value: "RemoteDNS"
   - proxy_rule_set:
+      match: "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Speedtest.yaml"
+      update_interval: 86400
+      value: "RemoteDNS"
+  - proxy_rule_set:
       match: "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Netflix.yaml"
       update_interval: 86400
       value: "RemoteDNS"
@@ -307,10 +311,6 @@ dns:
       match: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list"
       update_interval: 28800
       value: "DNSPod"
-  - proxy_rule_set:
-      match: "https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Speedtest.yaml"
-      update_interval: 86400
-      value: "RemoteDNS"
   - domain_wildcard:
       match: "*"
       value: "DNSPod"
@@ -814,26 +814,11 @@ rules:
     policy: AI
     name: AI
     update_interval: 28800
-- and:
-    match:
-    - rule_set:
-        match: https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Speedtest.yaml
-        update_interval: 86400
-    - not:
-        match:
-          or:
-            match:
-            - rule_set:
-                match: https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/China.yaml
-                update_interval: 86400
-            - rule_set:
-                match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list
-                update_interval: 86400
-            - rule_set:
-                match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list
-                update_interval: 86400
+- rule_set:
+    match: https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Speedtest.yaml
     policy: Speedtest Intl
     name: Speedtest Intl
+    update_interval: 86400
 - rule_set:
     match: https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/Netflix.yaml
     policy: Netflix

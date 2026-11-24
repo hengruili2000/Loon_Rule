@@ -33,7 +33,7 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 - `convert.py` 按流量规则顺序生成 DNS 域名规则，并复用远程规则集 URL 和更新间隔。明确走 `DIRECT` 的规则，以及默认选择 `DIRECT` 的 Apple 服务和漏网之鱼，使用 DNSPod。代理规则使用 Google 和 Cloudflare 的 HTTPS DNS。Apple TV 仍先于 Apple 服务匹配，两份 ChinaMax 规则继续覆盖 `static.mokahr.com` 和 `sns-v14.rednotecdn.com`。
 - DNSPod 的 HTTPS 连接显式直连。Google 和 Cloudflare 的 DoH 主机名在 443 端口上使用「默认代理」，上游主机名由 Bootstrap 解析。家庭 Wi-Fi `ASUS_C8_5G` 命中 SSID 规则时使用系统 DNS。
 - `lan` 和 `home.arpa` 使用系统 DNS。广告和保留域名继续按配置拒绝。Egern 强制内部 Proxy DNS 直连，因此 `proxy_nameservers` 显式使用 DNSPod；用户流量的 DNS 使用上述分流。
-- DNS 查询阶段无法获知策略组选项的手动变更、目标 IP、协议或 User-Agent。Speedtest 在其他域名规则之后匹配，给国内规则优先权。依赖这些条件的流量和 DNS 命中结果可能不同。[Egern DNS 文档](https://egernapp.com/zh-CN/docs/configuration/dns/)
+- DNS 查询阶段无法获知策略组选项的手动变更、目标 IP、协议或 User-Agent。Speedtest 的域名匹配沿用流量规则顺序。依赖这些条件的流量和 DNS 命中结果可能不同。[Egern DNS 文档](https://egernapp.com/zh-CN/docs/configuration/dns/)
 
 ## 用户指定的 14 个模块
 
@@ -78,11 +78,11 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 | Spotify | Spotify | 远程 `rules/Spotify.yaml` |
 | LAN | Lan | 远程 `rules/LAN.yaml` |
 | CN REGION | China | 远程 `rules/China.yaml`，保留原位置 |
-| Speedtest Intl | Speedtest | 远程 `rules/Speedtest.yaml`，主配置保留 NOT China/ChinaMax/ChinaMax_Domain 条件 |
+| Speedtest Intl | Speedtest | 远程 `rules/Speedtest.yaml`，独立匹配测速流量 |
 
-Speedtest 的国内排除只约束该服务规则，不提升整份配置中 China 规则的优先级。排除基于这三个列表当时能匹配的域名、UA 和已知 IP，并不代表能识别所有国内测速服务器。未收录的服务器仍可能命中 Speedtest 关键词规则。
+Speedtest Intl 在原有位置引用测速规则集，包括测速域名、关键词和 User-Agent。命中测速规则的流量使用 Speedtest Intl 策略。
 
-45 个原规则资源继续通过原 URL 加载，每 8 小时更新。Anthropic、Category-Dev 和上述 6 项共 8 份资源改由每日工作流转换并发布，主配置只保留远程 URL。Speedtest 的服务匹配数据也在远程产物中，配置中仅保留组合匹配关系。
+45 个原规则资源继续通过原 URL 加载，每 8 小时更新。Anthropic、Category-Dev 和上述 6 项共 8 份资源改由每日工作流转换并发布，主配置只保留远程 URL。
 
 ## 远程规则每天自动转换
 
