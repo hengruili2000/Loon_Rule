@@ -6,7 +6,7 @@
   "source_sha256": "50ffcf59a6c4f77e160a1b382c01c4418934789719d363a4d4392fc185403a92",
   "policy_groups": 28,
   "scene_ssid": "ASUS_C8_5G",
-  "rules": 66,
+  "rules": 65,
   "remote_rules": [
     {
       "tag": "Custom US Proxy",

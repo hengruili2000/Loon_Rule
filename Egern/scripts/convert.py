@@ -127,7 +127,13 @@ for line in sections['Rule']:
     fields = split_csv(line)
     if fields[0] == 'FINAL':
         final_policy = fields[1]; continue
-    rules.append(with_policy(condition(','.join(fields[:2]), 'Loon local rules'), fields[2]))
+    local_rule = condition(','.join(fields[:2]), 'Loon local rules')
+    kind, entry = next(iter(local_rule.items()))
+    if kind == 'ip_cidr' and entry['match'] == '198.18.0.0/16' and fields[2] == 'DIRECT':
+        continue  # Covered by 198.18.0.0/15.
+    if kind == 'ip_cidr' and entry['match'] == '198.18.0.0/15':
+        entry['no_resolve'] = True
+    rules.append(with_policy(local_rule, fields[2]))
 
 china_original = next(x['url'] for x in resources if x['role'] == 'original' and x['url'].endswith('/ChinaMax/ChinaMax.list'))
 china_domain = next(x['url'] for x in resources if x['role'] == 'original' and x['url'].endswith('/ChinaMax/ChinaMax_Domain.list'))

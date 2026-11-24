@@ -103,7 +103,7 @@ assert sum(r['mode'] == 'converted-remote' for r in report['remote_rules']) == 7
 assert sum(r['mode'] == 'converted-remote-with-China-exclusions' for r in report['remote_rules']) == 1
 sync_report = json.loads((ROOT / 'rules/sync-report.json').read_text())
 assert len(report['plugins']) == 28
-assert len(p['rules']) == report['rules'] == 62 + len(transport)
+assert len(p['rules']) == report['rules'] == 61 + len(transport)
 # Daily rule sync can change omissions without regenerating the profile report.
 for source in sync_report['sources']:
     assert source['input_rules'] == source['converted_rules'] + len(source['omitted_rules']), source['id']
