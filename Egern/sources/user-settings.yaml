@@ -82,7 +82,7 @@ dns:
       value: reject
   - ssid:
       match: ASUS_C8_5G
-      value: DNSPod
+      value: system
 
   # @generated-dns-forward
   # Egern 的内部 Proxy DNS 强制直连，使用可直连的上游避免代理启动依赖。

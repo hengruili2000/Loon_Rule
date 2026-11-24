@@ -88,7 +88,7 @@ dns:
       value: reject
   - ssid:
       match: ASUS_C8_5G
-      value: DNSPod
+      value: system
   # 以下规则由流量分流规则生成。
   - domain:
       match: "bahamut.akamaized.net"

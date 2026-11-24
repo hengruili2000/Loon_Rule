@@ -31,7 +31,7 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 ### DNS 分流
 
 - `convert.py` 按流量规则顺序生成 DNS 域名规则，并复用远程规则集 URL 和更新间隔。明确走 `DIRECT` 的规则，以及默认选择 `DIRECT` 的 Apple 服务和漏网之鱼，使用 DNSPod。代理规则使用 Google 和 Cloudflare 的 HTTPS DNS。Apple TV 仍先于 Apple 服务匹配，两份 ChinaMax 规则继续覆盖 `static.mokahr.com` 和 `sns-v14.rednotecdn.com`。
-- DNSPod 的 HTTPS 连接显式直连。Google 和 Cloudflare 的 DoH 主机名在 443 端口上使用「默认代理」，上游主机名由 Bootstrap 解析。家庭 Wi-Fi `ASUS_C8_5G` 上优先使用 DNSPod，与现有地区场景的默认直连行为一致。
+- DNSPod 的 HTTPS 连接显式直连。Google 和 Cloudflare 的 DoH 主机名在 443 端口上使用「默认代理」，上游主机名由 Bootstrap 解析。家庭 Wi-Fi `ASUS_C8_5G` 命中 SSID 规则时使用系统 DNS。
 - `lan` 和 `home.arpa` 使用系统 DNS。广告和保留域名继续按配置拒绝。Egern 强制内部 Proxy DNS 直连，因此 `proxy_nameservers` 显式使用 DNSPod；用户流量的 DNS 使用上述分流。
 - DNS 查询阶段无法获知策略组选项的手动变更、目标 IP、协议或 User-Agent。Speedtest 在其他域名规则之后匹配，给国内规则优先权。依赖这些条件的流量和 DNS 命中结果可能不同。[Egern DNS 文档](https://egernapp.com/zh-CN/docs/configuration/dns/)
 
