@@ -6,7 +6,7 @@
   "source_sha256": "50ffcf59a6c4f77e160a1b382c01c4418934789719d363a4d4392fc185403a92",
   "policy_groups": 28,
   "scene_ssid": "ASUS_C8_5G",
-  "rules": 62,
+  "rules": 66,
   "remote_rules": [
     {
       "tag": "Custom US Proxy",
@@ -691,7 +691,7 @@
   },
   "user_overrides": {
     "source": "sources/user-settings.yaml",
-    "sha256": "dbe7ebf53942e6800679bed69ec4fcd82b8d15cb083befd7051f2e4817dda32a",
+    "sha256": "e350aead550f337073168732b0acc1fc98f9aa639c464af4bcfb16557921cdd3",
     "top_level_keys": [
       "ipv6",
       "http_port",
@@ -710,21 +710,7 @@
       "dns",
       "real_ip_domains"
     ],
-    "dns_replacement": "whole-section; original Loon hosts and SSID DNS forwarding removed",
-    "compatibility_policy": "User explicitly requested exact values; do not expand ProxyDNS or convert reject.txt",
-    "dns_chinamax_coverage": {
-      "sources": [
-        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list",
-        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list"
-      ],
-      "upstream": "DNSPod",
-      "update_interval": 28800,
-      "position": "after existing Google/service rules, before cn and wildcard fallback",
-      "regression_domains": [
-        "static.mokahr.com",
-        "sns-v14.rednotecdn.com"
-      ]
-    },
+    "dns_replacement": "domain routing projected into DNS Forward; DIRECT defaults use DNSPod",
     "geoip_db_url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb"
   },
   "user_modules": [

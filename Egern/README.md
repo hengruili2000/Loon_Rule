@@ -1,6 +1,6 @@
 # Egern 配置迁移
 
-本目录将仓库根目录的 `Loon_custom.lcf` 转为 Egern YAML。转换日期：2026-11-16（Asia/Taipei）。通用设置、DNS 和真实 IP 域名已按用户后续提供的文本完整覆盖，并启用用户指定的 14 个模块。不兼容的远程规则由 GitHub Actions 每 24 小时转换成独立远程产物，主配置不再内嵌这些上游规则。原 Loon 插件的逐项等价迁移状态仍记录在 `plugin-status.md`。
+本目录将仓库根目录的 `Loon_custom.lcf` 转为 Egern YAML。转换日期：2026-11-16（Asia/Taipei）。使用用户指定的通用设置和真实 IP 域名，启用 14 个模块，并从流量规则派生 DNS 分流。不兼容的远程规则由 GitHub Actions 每 24 小时转换成独立远程产物，主配置不再内嵌这些上游规则。原 Loon 插件的逐项等价迁移状态仍记录在 `plugin-status.md`。
 
 ## 导入
 
@@ -26,21 +26,14 @@ https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/Egern_custo
 
 - HTTP/SOCKS 端口为 3080/3090，`vif_only: true`、`block_quic: true`、`hijack_dns: ['*:53']`，保留用户指定的路由排除列表和 10.7.0.1 回环地址。
 - GeoIP 覆盖为用户指定的 Loyalsoldier Country.mmdb。
-- DNS 使用用户的 6 组上游、阻断 IP 列表及其他参数；后续增加 2 条 ChinaMax DNS 补全规则，现共 66 条。原 Loon 的 Host 映射与 `PHICOMM_5G` DNS 转发不再合入；策略组中的 SSID 直连条件仍保留。
-- `real_ip_domains` 完整替换为用户提供的 34 项。
-- 用户明确选择保留 `proxy_nameservers: [ProxyDNS]` 和 Clash `reject.txt` 链接，因此没有将组名展开为服务器地址，也没有转换广告规则格式。这两处与当前官方 DNS 文档列举的写法/资源格式存在差异，未验证客户端能否按预期处理。[官方 DNS 文档](https://egernapp.com/docs/configuration/dns/)
-- `vif_hairpin_addresses` 和用户给出的其他原值均保留；本次 YAML 校验不等于 Egern 完整 schema 校验。
-- 原文中关于 DNS 强制走代理、代理服务器域名解析及 AdBlock.yaml 的说明也按要求保留。Egern 官方文档描述的上游连接路径取决于 DNS 类型及路由规则，配置中的注释不会单独建立代理路由；也没有因注释自动新增 AdBlock.yaml 分流规则。
+- `real_ip_domains` 保留用户提供的 34 项。原 Loon 的 Host 映射和 `PHICOMM_5G` DNS 转发未合入。
 
-### 国内域名落入境外 DNS 的修正
+### DNS 分流
 
-用户反馈 `static.mokahr.com` 和 `sns-v14.rednotecdn.com` 在 Egern 开启后解析到偏海外的地址。两者分别命中 ChinaMax 的 `.mokahr.com` 和 `.rednotecdn.com`，流量走 DIRECT；此前的 DNS 国内名单却没有覆盖它们，因而落入 Google/Cloudflare 的 Default 上游。
-
-本次直接复用现有流量分流的 `ChinaMax.list`、`ChinaMax_Domain.list` 两个远程源，通过 DNS `proxy_rule_set` 指向 DNSPod。客户端每 28800 秒（8 小时）更新，与流量规则使用同源数据，无需单独维护国内域名快照。混合规则源中的域名条件用于 DNS 匹配；这不意味着 IP/ASN/UA 条件能将未知域名判定为国内域名。
-
-两条规则放在现有明确服务分流、本地保留域名处理和 Google DNS 规则之后，在 `.cn` 和 `* → Default` 之前。已有 64 条规则的相对顺序未改，保留先命中的服务例外；这次没有把所有 DIRECT 服务一概改用国内 DNS。
-
-更新客户端配置后，确认两份 ChinaMax DNS 规则下载成功，再清理 DNS 缓存并重连 Egern。对反馈的两个域名，预期 DNS 日志命中新增 ChinaMax DNS 规则、上游为 DNSPod。实际 CDN 地址和地域仍由 DNS 服务与站点决定，本次未进行设备实测。
+- `convert.py` 按流量规则顺序生成 DNS 域名规则，并复用远程规则集 URL 和更新间隔。明确走 `DIRECT` 的规则，以及默认选择 `DIRECT` 的 Apple 服务和漏网之鱼，使用 DNSPod。代理规则使用 Google 和 Cloudflare 的 HTTPS DNS。Apple TV 仍先于 Apple 服务匹配，两份 ChinaMax 规则继续覆盖 `static.mokahr.com` 和 `sns-v14.rednotecdn.com`。
+- DNSPod 的 HTTPS 连接显式直连。Google 和 Cloudflare 的 DoH 主机名在 443 端口上使用「默认代理」，上游主机名由 Bootstrap 解析。家庭 Wi-Fi `ASUS_C8_5G` 上优先使用 DNSPod，与现有地区场景的默认直连行为一致。
+- `lan` 和 `home.arpa` 使用系统 DNS。广告和保留域名继续按配置拒绝。Egern 强制内部 Proxy DNS 直连，因此 `proxy_nameservers` 显式使用 DNSPod；用户流量的 DNS 使用上述分流。
+- DNS 查询阶段无法获知策略组选项的手动变更、目标 IP、协议或 User-Agent。Speedtest 在其他域名规则之后匹配，给国内规则优先权。依赖这些条件的流量和 DNS 命中结果可能不同。[Egern DNS 文档](https://egernapp.com/zh-CN/docs/configuration/dns/)
 
 ## 用户指定的 14 个模块
 
@@ -95,16 +88,16 @@ Speedtest 的国内排除只约束该服务规则，不提升整份配置中 Chi
 
 - 工作流：[sync-egern-rules.yml](../.github/workflows/sync-egern-rules.yml)。每天台北时间 **04:23**（UTC 20:23）执行一次，同时支持手动运行及转换代码/源清单变更后的自动运行。
 - 上游和产物映射：`sources/remote-rules.json`。产物为 `rules/Anthropic.yaml`、`rules/Category-Dev.yaml`、`rules/TikTok.yaml`、`rules/Netflix.yaml`、`rules/Spotify.yaml`、`rules/LAN.yaml`、`rules/China.yaml`、`rules/Speedtest.yaml`。
-- 主配置使用 `https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/<名称>.yaml` 引用这些产物，客户端每 86400 秒拉取一次。服务策略、53 项远程规则的相对顺序及 DNS 配置保持不变。
+- 主配置使用 `https://raw.githubusercontent.com/hengruili2000/Loon_Rule/main/Egern/rules/<名称>.yaml` 引用这些产物，客户端每 86400 秒拉取一次。流量规则和 DNS 分流引用相同的远程产物。
 - 转换先下载并验证全部 8 个上游，再更新产物。遇到下载失败、未知语法、无法等价转换的逻辑或混合 no-resolve 语义时，工作流失败，不发布新产物，保留仓库中最后一次有效版本。上游没有变化时不创建无意义提交。
-- `rules/sync-report.json` 记录每项上游 URL、内容哈希、转换条目数、排除项和逻辑转换信息。该报告随每日工作流更新；`conversion-report.json` 是生成主配置时的记录。
+- `rules/sync-report.json` 随每日工作流更新，记录每项上游 URL、内容哈希、转换条目数、排除项和逻辑转换信息。`conversion-report.json` 保存生成主配置时的记录。校验用同步报告核对当前产物的规则计数，允许上游排除项随同步变化。
 - 原上游的署名及许可注释保留在转换产物中。仍不支持的 PROCESS-NAME 条目明确记录在同步报告里，不伪造等价规则。
 - 复杂的域名 AND/OR/NOT 表达式由通用转换器解析并生成等价的锚定域名正则，不把特定上游的规则内容硬编码在主配置或脚本中。AWS ECR 的正反条件已做匹配回归测试。
 
 ## 兼容差异及未迁移项目
 
 - Category-Dev 的 AWS ECR `AND/NOT/DOMAIN-WILDCARD` 条件由每日转换器转为等价域名正则，保存在独立远程产物中。
-- 当前 8 条 PROCESS-NAME 规则没有迁移：Anthropic 中 5 条，替代的 TikTok、Netflix、Spotify 中各 1 条。Egern 当前文档的规则类型不包含进程匹配；相应服务的域名/IP 规则仍保留。最新条目见 `rules/sync-report.json`。
+- 生成主配置时有 8 条 PROCESS-NAME 规则未迁移，Anthropic 中有 5 条，替代的 TikTok、Netflix、Spotify 中各有 1 条。Egern 当前文档的规则类型不包含进程匹配，相应服务的域名和 IP 规则仍保留。最新条目见 `rules/sync-report.json`。
 - 初始 28 个可莉 Loon 插件没有根据其原文自动转换：原资源在初次迁移环境返回 403。后续用户指定的 14 个模块已单独启用，其中部分功能与原插件重叠，但未证明逐项等价。历史清单、原启用状态及绑定策略见 `plugin-status.md` 和报告。
 - 原可莉 GeoIP/ASN 下载返回 403；现按用户指定覆盖为 Loyalsoldier GeoIP，ASN 未设置自定义下载地址。数据库内容可能与原 Loon 版本不同。
 - `sni-sniffing`、`dns-reject-mode`、`domain-reject-mode`、`udp-fallback-mode`、`interface-mode`、全局 `test-timeout` 和 `resource-parser` 未找到直接对应的已文档化配置项，因此未伪造等价字段。STUN 拒绝规则也不能代替 Loon 对所有 UDP 失败连接的 REJECT 回退语义。
@@ -127,7 +120,7 @@ python3 Egern/scripts/validate.py
 
 日常同步不需要重新生成主配置：工作流只执行 `sync_remote_rules.py` 和 `test_remote_rules.py`，更新 `Egern/rules/`。只有策略/配置结构发生变化时才需要运行主配置生成器。
 
-已通过 YAML 解析、策略引用与循环检查、53 项原远程规则迁移计数、SSID 场景、默认规则位置、过滤表达式、CIDR 规范化和逻辑条件结构检查；主配置现在为 62 条规则，16 个顶层设置与当前设置源一致，66 条 DNS 规则及 14 项模块匹配。校验覆盖两份 DNS 源与 DIRECT 源一致、补全规则优先级、两个反馈域名匹配及域名后缀边界。另有转换器回归检查，验证逻辑规则等价性、条目计数、产物哈希及失败时不覆盖旧产物。初次迁移时使用 Egern 官方网站的 WebAssembly 转换器检查了 45 个保留远程分流源，见 `official-converter-check.json`。这些检查不等于 Egern 完整 schema 验证，未进行实际客户端导入、连接或脚本功能测试。
+校验脚本检查 YAML、策略引用和循环、53 项远程规则的迁移计数、SSID 场景、默认规则位置、过滤表达式、CIDR 和逻辑条件。DNS 检查覆盖规则生成顺序、DoH 连接策略、Apple TV 与 Apple 服务优先级、ChinaMax 和兜底。另有转换器回归检查验证规则等价性、计数、产物哈希和失败时保留旧产物。初次迁移时使用 Egern 官方网站的 WebAssembly 转换器检查了 45 个保留远程流量规则源，见 `official-converter-check.json`。客户端导入、DNS 上游连接和规则命中仍需设备实测。
 
 原规则资源仍可能受未来更新、网络访问和客户端版本影响；导入后应检查规则下载状态和实际命中日志。
 

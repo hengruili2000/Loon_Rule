@@ -42,194 +42,20 @@ dns:
   - 223.5.5.5                        # 阿里
   - 119.29.29.29                     # 腾讯 DNSPod
 
-  # 上游 DNS 组：forward 规则通过组名引用
   upstreams:
-    AliDNS:                          # 阿里系域名专用
-    - h3://dns.alidns.com/dns-query
-    - https://dns.alidns.com/dns-query
-    DNSPod:                          # 腾讯系 / 国内通用
+    DNSPod:
     - https://doh.pub/dns-query
     - https://sm2.doh.pub/dns-query
-    ByteDNS:                         # 字节系域名专用（官方明文 UDP，无 DoH）
-    - udp://180.184.1.1:53
-    - udp://180.184.2.2:53
-    Google:                          # Google / YouTube 系域名专用
-    - h3://dns.google/dns-query
+    RemoteDNS:
     - https://dns.google/dns-query
-    Default:                         # 兜底（境外域名）：经代理隧道解析，国际 DoH 可用
-    - h3://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
-    ProxyDNS:                        # 解析「代理节点服务器域名」专用；此时隧道尚未建立，必须国内优先
-    - h3://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
 
-  # DNS 分流规则：自上而下首个命中生效，顺序不可随意调整
+  # 本地例外优先。生成器在其后追加从流量规则派生的 DNS 分流。
   forward:
-  # ① DNS 层广告域名直接拒绝（Loyalsoldier 广告域名集；早于其他规则，节省无效解析）
-  #    与 rules 中的自建 AdBlock.yaml 分属不同解析阶段，互补而非重复
   - proxy_rule_set:
       match: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
       value: reject
       update_interval: 86400
-  # ② 阿里系 → AliDNS
-  - domain_suffix:
-      match: alibaba.com
-      value: AliDNS
-  - domain_suffix:
-      match: alipay.com
-      value: AliDNS
-  - domain_suffix:
-      match: alipayobjects.com
-      value: AliDNS
-  - domain_suffix:
-      match: aliapp.org
-      value: AliDNS
-  - domain_suffix:
-      match: alicdn.com
-      value: AliDNS
-  - domain_suffix:
-      match: aliyun.com
-      value: AliDNS
-  - domain_suffix:
-      match: aliyuncs.com
-      value: AliDNS
-  - domain_suffix:
-      match: taobao.com
-      value: AliDNS
-  - domain_suffix:
-      match: tmall.com
-      value: AliDNS
-  - domain_suffix:
-      match: amap.com
-      value: AliDNS
-  - domain_suffix:
-      match: ele.me
-      value: AliDNS
-  - domain_suffix:
-      match: dingtalk.com
-      value: AliDNS
-  - domain_suffix:
-      match: mzstatic.com            # Apple 静态资源 CDN，走国内解析以获得就近节点
-      value: AliDNS
-  # ③ 腾讯系 / 快手 / 小红书 → DNSPod
-  - domain_suffix:
-      match: qq.com
-      value: DNSPod
-  - domain_suffix:
-      match: wechat.com
-      value: DNSPod
-  - domain_suffix:
-      match: weixin.com
-      value: DNSPod
-  - domain_suffix:
-      match: tencent.com
-      value: DNSPod
-  - domain_suffix:
-      match: qcloud.com
-      value: DNSPod
-  - domain_suffix:
-      match: myqcloud.com
-      value: DNSPod
-  - domain_suffix:
-      match: tencdns.cn
-      value: DNSPod
-  - domain_suffix:
-      match: kuaishou.com
-      value: DNSPod
-  - domain_suffix:
-      match: gifshow.com
-      value: DNSPod
-  - domain_suffix:
-      match: yximgs.com
-      value: DNSPod
-  - domain_suffix:
-      match: kuaishoupay.com
-      value: DNSPod
-  - domain_suffix:
-      match: xiaohongshu.com
-      value: DNSPod
-  - domain_suffix:
-      match: xhscdn.com
-      value: DNSPod
-  # ④ 字节系 → ByteDNS
-  - domain_suffix:
-      match: bytedance.com
-      value: ByteDNS
-  - domain_suffix:
-      match: bytecdn.com
-      value: ByteDNS
-  - domain_suffix:
-      match: bytecdn.cn
-      value: ByteDNS
-  - domain_suffix:
-      match: bytedns.net
-      value: ByteDNS
-  - domain_suffix:
-      match: bytednsdoc.com
-      value: ByteDNS
-  - domain_suffix:
-      match: douyin.com
-      value: ByteDNS
-  - domain_suffix:
-      match: douyincdn.com
-      value: ByteDNS
-  - domain_suffix:
-      match: douyinvod.com
-      value: ByteDNS
-  - domain_suffix:
-      match: pstatp.com
-      value: ByteDNS
-  - domain_suffix:
-      match: amemv.com
-      value: ByteDNS
-  - domain_suffix:
-      match: toutiao.com
-      value: ByteDNS
-  - domain_suffix:
-      match: ixigua.com
-      value: ByteDNS
-  - domain_suffix:
-      match: isnssdk.com
-      value: ByteDNS
-  - domain_suffix:
-      match: awemeughun.com
-      value: ByteDNS
-  - domain_suffix:
-      match: byteimg.com
-      value: ByteDNS
-  - domain_suffix:
-      match: bytegoofy.com
-      value: ByteDNS
-  - domain_suffix:
-      match: toutiaocdn.com
-      value: ByteDNS
-  - domain_suffix:
-      match: douyinpic.com
-      value: ByteDNS
-  - domain_suffix:
-      match: douyinstatic.com
-      value: ByteDNS
-  - domain_suffix:
-      match: idouyinvod.com
-      value: ByteDNS
-  - domain_suffix:
-      match: iesdouyin.com
-      value: ByteDNS
-  # ⑤ 自建国内直连域名集 → DNSPod
-  - proxy_rule_set:
-      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/Direct.yaml
-      value: DNSPod
-      update_interval: 604800
-  # ⑥ App Store 域名走境外 DNS（配合 Apple 策略组，避免解析到不匹配的 CDN）
-  - domain_suffix:
-      match: itunes.apple.com
-      value: Default
-  - domain_suffix:
-      match: apps.apple.com
-      value: Default
-  # ⑦ 本地/保留域名处理
-  #    顺序要点：home.arpa 与 lan 必须放在 arpa 之前，
-  #    否则 home.arpa 会被上层的 arpa 规则先行命中而被 reject
   - domain_suffix:
       match: lan
       value: system                  # 局域网域名交给系统 DNS（路由器）解析
@@ -254,39 +80,15 @@ dns:
   - domain_suffix:
       match: localhost
       value: reject
-  # ⑧ Google 系 → Google DNS（避免被国内 DNS 污染/错误解析）
-  - proxy_rule_set:
-      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/YouTubeMusic.yaml
-      value: Google
-      update_interval: 604800
-  - proxy_rule_set:
-      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/YouTube.yaml
-      value: Google
-      update_interval: 604800
-  - proxy_rule_set:
-      match: https://raw.githubusercontent.com/jnlaoshu/MySelf/main/Egern/Rule/Google.yaml
-      value: Google
-      update_interval: 604800
-  # ⑨ 国内 DNS 补全：复用流量分流的两份 ChinaMax 规则源
-  # 放在原有服务/Google DNS 规则之后，覆盖遗漏的国内 .com 和 CDN 域名
-  - proxy_rule_set:
-      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax.list
+  - ssid:
+      match: ASUS_C8_5G
       value: DNSPod
-      update_interval: 28800
-  - proxy_rule_set:
-      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Loon/ChinaMax/ChinaMax_Domain.list
-      value: DNSPod
-      update_interval: 28800
-  # ⑩ 兜底：.cn 走国内，其余全部走 Default（境外）
-  - domain_suffix:
-      match: cn
-      value: DNSPod
-  - domain_wildcard:
-      match: '*'
-      value: Default
-  # 解析代理节点服务器域名所用的 DNS 组（引用上方 ProxyDNS） 
+
+  # @generated-dns-forward
+  # Egern 的内部 Proxy DNS 强制直连，使用可直连的上游避免代理启动依赖。
   proxy_nameservers:
-  - ProxyDNS
+  - https://doh.pub/dns-query
+  - https://sm2.doh.pub/dns-query
 
   # 丢弃解析结果落在下列网段的响应（防 DNS 污染/劫持）
   # 注意：含私网段，若自建域名公网 DNS 解析到内网 IP 会被拦截

@@ -9,6 +9,7 @@ from collections import Counter
 from urllib.parse import unquote
 import hashlib, ipaddress, json, re, subprocess
 from rule_converter import parse_rule
+from dns_forward import dns_forward, dns_transport_rules, render_dns_settings
 
 ROOT = Path(__file__).resolve().parents[1]
 SCENE_SSID = 'ASUS_C8_5G'
@@ -169,7 +170,7 @@ profile['modules'] = []
 profile['mitm'] = {'hostnames': {'includes': [], 'excludes': []}}
 
 # Explicit user settings replace the corresponding top-level sections in full.
-# Preserve their source text, comments, values and DNS rule order verbatim.
+# Preserve their source text and append DNS rules derived from traffic routing.
 def read_yaml(path):
     return json.loads(subprocess.run(['ruby', '-ryaml', '-rjson', '-e',
         'puts JSON.generate(YAML.load_file(ARGV[0]))', str(path)],
@@ -180,19 +181,22 @@ modules_path = ROOT / 'sources/user-modules.yaml'
 user_settings = read_yaml(settings_path)
 user_modules = read_yaml(modules_path)['modules']
 profile.update(user_settings)
+forward = dns_forward(user_settings['dns'], rules, groups)
+profile['rules'] = [*dns_transport_rules(user_settings['dns']), *rules]
+settings_text = render_dns_settings(
+    settings_path.read_text(), forward[len(user_settings['dns']['forward']):])
 profile['modules'] = user_modules
 remainder = {k: v for k, v in profile.items() if k not in user_settings and k != 'modules'}
 json_text = json.dumps(remainder, ensure_ascii=False)
 yaml = subprocess.run(['ruby', '-rjson', '-ryaml', '-e', 'STDOUT.write(YAML.dump(JSON.parse(STDIN.read)))'], input=json_text, text=True, capture_output=True, check=True).stdout
 header = '''# Loon_custom.lcf → Egern；转换日期 2026-11-16（Asia/Taipei）。
 # 导入后先向「节点订阅」添加订阅并选择地区节点；原文件不含任何订阅。
-# 通用设置使用用户提供内容，DNS 已按后续要求增加 ChinaMax 国内域名补全。
-# 启用指定的 14 个模块；保留原有 DNS 服务规则及其优先级。
-# 保留用户指定的 ProxyDNS 组名写法及 Clash reject.txt 链接，未作兼容改写。
+# DNS 分流从流量域名规则派生，代理域名使用 RemoteDNS，直连域名使用 DNSPod。
+# 启用指定的 14 个模块。DNS 适用范围与例外见 README.md。
 # 尚未经过 Egern 客户端实测；完整差异和已知待验证项见 README.md。
 # 不兼容的上游由 GitHub 工作流每天转换，主配置仅引用独立远程规则集。
 '''
-rendered = (header + settings_path.read_text().rstrip() + '\n\n'
+rendered = (header + settings_text.rstrip() + '\n\n'
             + modules_path.read_text().rstrip() + '\n\n'
             + yaml.removeprefix('---\n'))
 (ROOT / 'Egern_custom.yaml').write_text(rendered)
@@ -204,7 +208,7 @@ report = {'date': '2026-11-16', 'timezone': 'Asia/Taipei',
           'source_url': 'https://github.com/hengruili2000/Loon_Rule/blob/main/Loon_custom.lcf',
           'source_blob_sha': 'a1a224ed582cb5b94ece3a420440f6ef8f533d2f',
           'source_sha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
-          'policy_groups': len(groups), 'scene_ssid': SCENE_SSID, 'rules': len(rules), 'remote_rules': remote_report,
+          'policy_groups': len(groups), 'scene_ssid': SCENE_SSID, 'rules': len(profile['rules']), 'remote_rules': remote_report,
           'omitted_rules': skipped, 'normalized_cidrs': normalized, 'plugins': plugins,
           'unmapped_general_fields': ['sni-sniffing', 'dns-reject-mode', 'domain-reject-mode', 'udp-fallback-mode', 'interface-mode', 'test-timeout', 'resource-parser'],
           'unavailable_database_overrides': {k: general[k] for k in ['geoip-url', 'ipasn-url']},
@@ -212,18 +216,11 @@ report = {'date': '2026-11-16', 'timezone': 'Asia/Taipei',
               'source': 'sources/user-settings.yaml',
               'sha256': hashlib.sha256(settings_path.read_bytes()).hexdigest(),
               'top_level_keys': list(user_settings),
-              'dns_replacement': 'whole-section; original Loon hosts and SSID DNS forwarding removed',
-              'compatibility_policy': 'User explicitly requested exact values; do not expand ProxyDNS or convert reject.txt',
-              'dns_chinamax_coverage': {
-                  'sources': [china_original, china_domain],
-                  'upstream': 'DNSPod',
-                  'update_interval': 28800,
-                  'position': 'after existing Google/service rules, before cn and wildcard fallback',
-                  'regression_domains': ['static.mokahr.com', 'sns-v14.rednotecdn.com']},
+              'dns_replacement': 'domain routing projected into DNS Forward; DIRECT defaults use DNSPod',
               'geoip_db_url': user_settings['geoip_db_url']},
           'user_modules': user_modules,
           'user_modules_source_sha256': hashlib.sha256(modules_path.read_bytes()).hexdigest(),
           'remote_conversion_workflow': '.github/workflows/sync-egern-rules.yml',
           'remote_conversion_interval_seconds': 86400}
 (ROOT / 'conversion-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
-print(json.dumps({'groups': len(groups), 'rules': len(rules), 'remote_sources': len(remote_report), 'unsupported_process_rules': len(skipped), 'original_unconverted_plugins': len(plugins), 'user_modules': len(user_modules), 'bytes': len(rendered.encode())}, ensure_ascii=False))
+print(json.dumps({'groups': len(groups), 'rules': len(profile['rules']), 'remote_sources': len(remote_report), 'unsupported_process_rules': len(skipped), 'original_unconverted_plugins': len(plugins), 'user_modules': len(user_modules), 'bytes': len(rendered.encode())}, ensure_ascii=False))

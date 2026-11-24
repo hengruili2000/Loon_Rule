@@ -2,6 +2,7 @@
 """Structural and routing-regression checks; does not claim Egern runtime testing."""
 from pathlib import Path
 import hashlib, json, subprocess, re
+from dns_forward import dns_forward, dns_transport_rules
 ROOT = Path(__file__).resolve().parents[1]
 p = json.loads(subprocess.run(['ruby', '-ryaml', '-rjson', '-e', 'puts JSON.generate(YAML.load_file(ARGV[0]))', str(ROOT / 'Egern_custom.yaml')], check=True, capture_output=True, text=True).stdout)
 report = json.loads((ROOT / 'conversion-report.json').read_text())
@@ -51,31 +52,37 @@ assert p['rules'][-1] == {'default': {'policy': '漏网之鱼'}}
 assert not any('default' in r for r in p['rules'][:-1])
 assert next(iter(groups['漏网之鱼'].values()))['policies'][:2] == ['DIRECT', '默认代理']
 assert next(iter(groups['Apple服务'].values()))['policies'][0] == 'DIRECT'
-# Compare the complete supplied data, including exact DNS order, without applying
-# compatibility "fixes" the user explicitly declined.
 def read_yaml(path):
     return json.loads(subprocess.run(['ruby', '-ryaml', '-rjson', '-e',
         'puts JSON.generate(YAML.load_file(ARGV[0]))', str(path)],
         check=True, capture_output=True, text=True).stdout)
 settings = read_yaml(ROOT / 'sources/user-settings.yaml')
 for key, value in settings.items():
-    assert p[key] == value, f'User setting changed: {key}'
+    if key != 'dns':
+        assert p[key] == value, f'User setting changed: {key}'
 assert p['modules'] == read_yaml(ROOT / 'sources/user-modules.yaml')['modules']
 assert len(p['modules']) == 14 and all(m['enabled'] for m in p['modules'])
-assert p['dns']['proxy_nameservers'] == ['ProxyDNS']
-assert p['dns']['forward'][0]['proxy_rule_set']['match'] == 'https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt'
-assert p['dns']['forward'][-1] == {'domain_wildcard': {'match': '*', 'value': 'Default'}}
-assert len(p['dns']['forward']) == 66
-china_urls = [next(iter(r.values()))['match'] for r in p['rules']
-              if next(iter(r.values())).get('name') in {'ChinaMax', 'ChinaMax - Domain'}]
+dns = settings['dns']
+transport = list(dns_transport_rules(dns))
+assert p['rules'][:len(transport)] == transport
+forward = p['dns']['forward']
+assert p['dns'] == {**dns, 'forward': dns_forward(dns, p['rules'][len(transport):], p['policy_groups'])}
+assert forward[-1] == {'domain_wildcard': {'match': '*', 'value': 'DNSPod'}}
+
+by_match = {data['match']: (i, data['value'])
+            for i, r in enumerate(forward) for kind, data in r.items()
+            if kind in {'proxy_rule_set', 'domain_suffix'}}
+assert by_match['bahamut.com.tw'][1] == 'RemoteDNS'
+china_urls = [r['rule_set']['match'] for r in p['rules'] if 'rule_set' in r
+              and r['rule_set'].get('name') in {'ChinaMax', 'ChinaMax - Domain'}]
 assert len(china_urls) == 2
-assert p['dns']['forward'][-4:-2] == [
-    {'proxy_rule_set': {'match': url, 'value': 'DNSPod', 'update_interval': 28800}}
-    for url in china_urls]
-# Existing explicit services and Google rules precede the domestic fallback.
-assert all(next(iter(r.values())).get('value') != 'Google'
-           for r in p['dns']['forward'][-4:])
-assert p['dns']['forward'][-2] == {'domain_suffix': {'match': 'cn', 'value': 'DNSPod'}}
+assert all(by_match[url][1] == 'DNSPod' for url in china_urls)
+apple_tv = next((position, value) for url, (position, value) in by_match.items()
+                if url.endswith('/AppleTV.list'))
+apple = next((position, value) for url, (position, value) in by_match.items()
+             if url.endswith('/Apple.list'))
+assert apple_tv[1] == 'RemoteDNS' and apple[1] == 'DNSPod' and apple_tv[0] < apple[0]
+assert all(apple[0] < by_match[url][0] for url in china_urls)
 china_domain_resource = next(r for r in json.loads((ROOT / 'sources/resources.json').read_text())
                              if r['url'] == china_urls[1])
 domain_lines = [s.strip() for s in (ROOT / china_domain_resource['path']).read_text().splitlines()
@@ -95,10 +102,11 @@ assert len(report['remote_rules']) == 53
 assert sum(r['mode'] == 'converted-remote' for r in report['remote_rules']) == 7
 assert sum(r['mode'] == 'converted-remote-with-China-exclusions' for r in report['remote_rules']) == 1
 sync_report = json.loads((ROOT / 'rules/sync-report.json').read_text())
-assert report['omitted_rules'] == [r for s in sync_report['sources'] for r in s['omitted_rules']]
 assert len(report['plugins']) == 28
-assert len(p['rules']) == 62
+assert len(p['rules']) == report['rules'] == 62 + len(transport)
+# Daily rule sync can change omissions without regenerating the profile report.
 for source in sync_report['sources']:
+    assert source['input_rules'] == source['converted_rules'] + len(source['omitted_rules']), source['id']
     native = read_yaml(ROOT / source['output'])
     assert all(key == 'no_resolve' or key.endswith('_set') for key in native)
     assert sum(len(v) for k, v in native.items() if k != 'no_resolve') == source['converted_rules']
